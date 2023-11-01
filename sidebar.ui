@@ -719,7 +719,6 @@
  </widget>
  <resources>
   <include location="resource.qrc"/>
-  <include location="../../.designer/backup/resource.qrc"/>
  </resources>
  <connections>
   <connection>
