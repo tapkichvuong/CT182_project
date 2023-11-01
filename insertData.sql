@@ -83,6 +83,17 @@ insert into phuong values
 (82, "Xã Trường Xuân A"),
 (83, "Xã Trường Xuân B");
 
+insert into huyen values
+(1, "Quận Ninh Kiều"),
+(2, "Quận Ô Môn"),
+(3, "Quận Bình Thuỷ"),
+(4, "Quận Cái Răng"),
+(5, "Quận Thốt Nốt"),
+(6, "Huyện Vĩnh Thạnh"),
+(7, "Huyện Cờ Đỏ"),
+(8, "Huyện Phong Điền"),
+(9, "Huyện Thới Lai");
+
 insert into theloai values
 (1, 'Tiểu thuyết'),
 (2, 'Kỹ năng sống'),
