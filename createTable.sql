@@ -16,7 +16,8 @@ create table huyen(
 
 create table docgia(
 	madocgia varchar(8) primary key,
-	fullname varchar(50),
+	firstname varchar(20),
+    lastname varchar(20),
     gender int,
     phone varchar(10),
     email varchar(30),
