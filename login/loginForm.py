@@ -1,7 +1,7 @@
 import sys
 from PyQt5.QtWidgets import (QApplication, QDialog, QMessageBox)
 from PyQt5.QtCore import QFile, QTextStream
-from login.Ui_LoginWindow import Ui_Form
+from Ui_LoginWindow import Ui_Form
 
 class LoginForm(QDialog):
     def __init__(self):

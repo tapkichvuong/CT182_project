@@ -351,4 +351,4 @@ class Ui_MainWindow(object):
         self.label_8.setText(_translate("MainWindow", "Customers Page"))
         self.label_9.setText(_translate("MainWindow", "Search Page"))
         self.label_10.setText(_translate("MainWindow", "User Page"))
-from mainWindow import resource_rc
+import resource_rc
