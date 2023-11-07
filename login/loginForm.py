@@ -1,8 +1,8 @@
 import sys
 from PyQt5.QtWidgets import (QApplication, QDialog, QMessageBox)
 from PyQt5.QtCore import QFile, QTextStream
-from main import MainWindow
-from Ui_LoginWindow import Ui_Form
+from login.Ui_LoginWindow import Ui_Form
+
 class LoginForm(QDialog):
     def __init__(self):
         super(LoginForm, self).__init__()
@@ -29,10 +29,7 @@ if __name__ == '__main__':
     style_stream = QTextStream(style_file)
     app.setStyleSheet(style_stream.readAll())
     
-    while True:
-        loginWindow = LoginForm()
-        if loginWindow.exec_() == QDialog.Accepted:
-            win = MainWindow()
-            win.show()
-            app.exec_()
+    loginWindow = LoginForm()
+    loginWindow.show()
     
+    sys.exit(app.exec())

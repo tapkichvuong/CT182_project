@@ -2,7 +2,7 @@ import sys
 from PyQt5.QtWidgets import QMainWindow, QApplication, QPushButton
 from PyQt5.QtCore import pyqtSlot, QFile, QTextStream
 
-from sidebar_ui import Ui_MainWindow
+from mainWindow.sidebar_ui import Ui_MainWindow
 
 
 class MainWindow(QMainWindow):
