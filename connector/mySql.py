@@ -1,5 +1,6 @@
 # Importing module 
 import mysql.connector
+from hashlib import sha256
 
 class mydb:
     def __init__(self):
@@ -14,7 +15,10 @@ class mydb:
     def handleRegister(self, account):
         cursor = self.mydb.cursor()
         sql = "INSERT INTO taikhoan (username, pass) VALUES (%s, %s)"
-        val = (account['username'], account['pass'])
+        #Bam mat khau 
+        hash_pass = sha256(account['pass'].encode('utf-8')).hexdigest()
+        print(hash_pass)
+        val = (account['username'], hash_pass)
         cursor.execute(sql, val)
 
         self.mydb.commit()
@@ -23,11 +27,14 @@ class mydb:
         
     def handleLogin(self, username, password):
         cursor = self.mydb.cursor()
-        sql = "SELECT pass FROM taikhoan WHERE username = %s"
+        sql = "SELECT GetUserPassword(%s)"
         val = (username,)
         cursor.execute(sql, val)
-        myresult = cursor.fetchall()
-        return (password == myresult[0][0])
+        myresult = cursor.fetchone()
+        print(myresult)
+        #Bam mat khau 
+        hash_pass = sha256(password.encode('utf-8')).hexdigest()
+        return (hash_pass == myresult[0])
 
         
 db = mydb()
