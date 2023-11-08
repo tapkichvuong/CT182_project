@@ -24,8 +24,7 @@ class LoginForm(QDialog):
         if self.ui.lineEdit_name.text() == '1' and self.ui.lineEdit_pass.text() == '1':
             self.accept()
         else:
-            msg.setText('Incorrect Password')
-            msg.exec_()
+            msg.warning(self, 'Error', 'username or password is not correct')
     
     def redirect_to_register(self):
         QWidget.setVisible(self, False)
