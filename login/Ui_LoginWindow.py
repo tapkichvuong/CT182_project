@@ -145,7 +145,7 @@ class Ui_Form(object):
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
-        Form.setWindowTitle(_translate("Form", "Form"))
+        Form.setWindowTitle(_translate("Form", "Library"))
         self.label_name.setText(_translate("Form", "User name"))
         self.lineEdit_name.setPlaceholderText(_translate("Form", "user name or email"))
         self.label_pass.setText(_translate("Form", "Password"))
