@@ -20,7 +20,7 @@ class mydb:
         print(hash_pass)
         val = (account['username'], hash_pass)
         cursor.execute(sql, val)
-
+        cursor.close()
         self.mydb.commit()
 
         print(cursor.rowcount, "record inserted.")
@@ -32,10 +32,7 @@ class mydb:
         cursor.execute(sql, val)
         myresult = cursor.fetchone()
         print(myresult)
+        cursor.close()
         #Bam mat khau 
         hash_pass = sha256(password.encode('utf-8')).hexdigest()
         return (hash_pass == myresult[0])
-
-        
-db = mydb()
-print(db.handleLogin('admin', 'admin'))
