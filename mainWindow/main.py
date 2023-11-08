@@ -1,16 +1,24 @@
 import sys
-from PyQt5.QtWidgets import QMainWindow, QApplication, QPushButton
+from PyQt5.QtWidgets import QMainWindow, QApplication, QPushButton,QWidget
 from PyQt5.QtCore import pyqtSlot, QFile, QTextStream
 
 from sidebar_ui import Ui_MainWindow
+from ql_sach import Ui_Form
 
-
+class qlsach(QWidget):
+    def __init__ (self):
+        super(qlsach,self). __init__()
+        self.ui = Ui_Form()
+        self.ui.setupUi(self)
 class MainWindow(QMainWindow):
     def __init__(self):
         super(MainWindow, self).__init__()
 
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
+
+        self.qlsach =qlsach()
+        self.ui.gridLayout_4.addWidget(self.qlsach,0,1,1,1)
 
         self.ui.icon_only_widget.hide()
         self.ui.stackedWidget.setCurrentIndex(0)
