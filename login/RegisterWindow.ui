@@ -575,7 +575,7 @@
   <customwidget>
    <class>BodyLabel</class>
    <extends>QLabel</extends>
-   <header>qfluentwidgets</header>
+   <header location="global">qfluentwidgets</header>
   </customwidget>
  </customwidgets>
  <resources>
