@@ -3,6 +3,7 @@ from PyQt5.QtWidgets import (QApplication, QDialog, QMessageBox, QLineEdit, QWid
 from PyQt5.QtCore import QFile, QTextStream
 from login.Ui_LoginWindow import Ui_Form
 from login.RegisterForm import RegisterForm
+from connector.mySql import mydb
 class LoginForm(QDialog):
     def __init__(self):
         super(LoginForm, self).__init__()
@@ -21,7 +22,9 @@ class LoginForm(QDialog):
                 
     def handleLogin(self):
         msg = QMessageBox()
-        if self.ui.lineEdit_name.text() == '1' and self.ui.lineEdit_pass.text() == '1':
+        db = mydb()
+        checkPass = db.handleLogin(self.ui.lineEdit_name.text(), self.ui.lineEdit_pass.text())
+        if checkPass:
             self.accept()
         else:
             msg.warning(self, 'Error', 'username or password is not correct')

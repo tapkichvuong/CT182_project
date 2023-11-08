@@ -20,3 +20,15 @@ class mydb:
         self.mydb.commit()
 
         print(cursor.rowcount, "record inserted.")
+        
+    def handleLogin(self, username, password):
+        cursor = self.mydb.cursor()
+        sql = "SELECT pass FROM taikhoan WHERE username = %s"
+        val = (username,)
+        cursor.execute(sql, val)
+        myresult = cursor.fetchall()
+        return (password == myresult[0][0])
+
+        
+db = mydb()
+print(db.handleLogin('admin', 'admin'))

@@ -149,7 +149,7 @@ class Ui_Form(object):
         self.pushButton_4.setText(_translate("Form", "Thêm"))
         self.pushButton_3.setText(_translate("Form", "Cập Nhật"))
         self.pushButton_2.setText(_translate("Form", "Xoá"))
-        self.pushButton.setText(_translate("Form", "Tìm Kimếm"))
+        self.pushButton.setText(_translate("Form", "Tìm Kiếm"))
         item = self.tableWidget.horizontalHeaderItem(0)
         item.setText(_translate("Form", "Mã Sách"))
         item = self.tableWidget.horizontalHeaderItem(1)
