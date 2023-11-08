@@ -1,8 +1,8 @@
 import sys
 from PyQt5.QtWidgets import (QApplication, QDialog, QMessageBox, QLineEdit, QWidget)
 from PyQt5.QtCore import QFile, QTextStream
-from Ui_LoginWindow import Ui_Form
-from RegisterForm import RegisterForm
+from login.Ui_LoginWindow import Ui_Form
+from login.RegisterForm import RegisterForm
 class LoginForm(QDialog):
     def __init__(self):
         super(LoginForm, self).__init__()

@@ -253,4 +253,4 @@ class Ui_Form(object):
         self.label_2.setText(_translate("Form", "Already have an account? "))
         self.LoginBtn.setText(_translate("Form", "Login"))
 from qfluentwidgets import BodyLabel, CheckBox, LineEdit, PrimaryPushButton
-import loginrsc_rc
+from login import loginrsc_rc
