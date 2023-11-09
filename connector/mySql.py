@@ -11,8 +11,8 @@ class mydb:
         self.mydb = mysql.connector.connect(
             host = "127.0.0.1",
             user = "root",
-            password = "123456",
-            database = "qlthuvien"
+            password = "Minhhuy2310@",
+            database = "librarydb"
         )
     # Printing the connection object 
     def handleLoadSach(self):
