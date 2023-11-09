@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>Form</class>
- <widget class="QWidget" name="Form">
+ <class>ql_tp_sach</class>
+ <widget class="QWidget" name="ql_tp_sach">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -13,103 +13,607 @@
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <widget class="QWidget" name="layoutWidget">
-   <property name="geometry">
-    <rect>
-     <x>310</x>
-     <y>30</y>
-     <width>195</width>
-     <height>53</height>
-    </rect>
-   </property>
-   <layout class="QGridLayout" name="gridLayout_2">
-    <item row="0" column="0">
-     <widget class="QLabel" name="label_3">
-      <property name="text">
-       <string>Mã Tác Giả</string>
-      </property>
-     </widget>
-    </item>
-    <item row="0" column="1">
-     <widget class="QLineEdit" name="lineEdit_3"/>
-    </item>
-    <item row="1" column="0">
-     <widget class="QLabel" name="label_4">
-      <property name="text">
-       <string>Tên Tác Giả</string>
-      </property>
-     </widget>
-    </item>
-    <item row="1" column="1">
-     <widget class="QLineEdit" name="lineEdit_4"/>
-    </item>
-   </layout>
-  </widget>
-  <widget class="QWidget" name="layoutWidget_2">
-   <property name="geometry">
-    <rect>
-     <x>550</x>
-     <y>30</y>
-     <width>195</width>
-     <height>53</height>
-    </rect>
-   </property>
-   <layout class="QGridLayout" name="gridLayout_3">
-    <item row="0" column="0">
-     <widget class="QLabel" name="label_5">
-      <property name="text">
-       <string>Mã Thể Loại</string>
-      </property>
-     </widget>
-    </item>
-    <item row="0" column="1">
-     <widget class="QLineEdit" name="lineEdit_5"/>
-    </item>
-    <item row="1" column="0">
-     <widget class="QLabel" name="label_6">
-      <property name="text">
-       <string>Tên thể loại</string>
-      </property>
-     </widget>
-    </item>
-    <item row="1" column="1">
-     <widget class="QLineEdit" name="lineEdit_6"/>
-    </item>
-   </layout>
-  </widget>
-  <widget class="QWidget" name="">
-   <property name="geometry">
-    <rect>
-     <x>90</x>
-     <y>30</y>
-     <width>195</width>
-     <height>53</height>
-    </rect>
-   </property>
-   <layout class="QGridLayout" name="gridLayout">
-    <item row="0" column="0">
-     <widget class="QLabel" name="label">
-      <property name="text">
-       <string>Mã NXB</string>
-      </property>
-     </widget>
-    </item>
-    <item row="0" column="1">
-     <widget class="QLineEdit" name="lineEdit"/>
-    </item>
-    <item row="1" column="0">
-     <widget class="QLabel" name="label_2">
-      <property name="text">
-       <string>Tên NXB</string>
-      </property>
-     </widget>
-    </item>
-    <item row="1" column="1">
-     <widget class="QLineEdit" name="lineEdit_2"/>
-    </item>
-   </layout>
-  </widget>
+  <layout class="QGridLayout" name="gridLayout_4">
+   <item row="0" column="3">
+    <layout class="QGridLayout" name="gridLayout_3">
+     <item row="4" column="1">
+      <widget class="QPushButton" name="pushButton_editTheLoai">
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">background-color: rgb(66, 139, 202);
+color: rgb(255,255,255)</string>
+       </property>
+       <property name="text">
+        <string>Sửa</string>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="2">
+      <widget class="QPushButton" name="pushButton_deleteTheLoai">
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">background-color: rgb(237, 94, 104);
+color: rgb(255,255,255)</string>
+       </property>
+       <property name="text">
+        <string>Xóa</string>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="0">
+      <widget class="QLabel" name="label_tenTheLoai">
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Tên thể loại</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="1" colspan="2">
+      <widget class="QLineEdit" name="lineEdit_maTheLoai"/>
+     </item>
+     <item row="0" column="0">
+      <widget class="QLabel" name="label_maTheLoai">
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Mã Thể Loại</string>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="1" colspan="2">
+      <widget class="QLineEdit" name="lineEdit_tenTheLoai">
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+         <weight>50</weight>
+         <bold>false</bold>
+        </font>
+       </property>
+      </widget>
+     </item>
+     <item row="6" column="0" colspan="3">
+      <widget class="QPushButton" name="pushButton_theLoai">
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">background-color:rgb(154, 164, 192);
+color: rgb(255,255,255)</string>
+       </property>
+       <property name="text">
+        <string>Tìm kiếm</string>
+       </property>
+       <property name="icon">
+        <iconset resource="ql_tp_sach_rsc.qrc">
+         <normaloff>:/icon/icon/search-13-48.ico</normaloff>:/icon/icon/search-13-48.ico</iconset>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="0">
+      <widget class="QPushButton" name="pushButton_addTheLoai">
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">background-color:rgb(85, 195, 186);
+color:rgb(255,255,255)</string>
+       </property>
+       <property name="text">
+        <string>Thêm</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="1">
+      <spacer name="verticalSpacer_9">
+       <property name="orientation">
+        <enum>Qt::Vertical</enum>
+       </property>
+       <property name="sizeType">
+        <enum>QSizePolicy::Fixed</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>20</width>
+         <height>5</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item row="5" column="1">
+      <spacer name="verticalSpacer_11">
+       <property name="orientation">
+        <enum>Qt::Vertical</enum>
+       </property>
+       <property name="sizeType">
+        <enum>QSizePolicy::Fixed</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>20</width>
+         <height>5</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item row="3" column="1">
+      <spacer name="verticalSpacer_10">
+       <property name="orientation">
+        <enum>Qt::Vertical</enum>
+       </property>
+       <property name="sizeType">
+        <enum>QSizePolicy::Fixed</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>20</width>
+         <height>5</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item row="8" column="0" colspan="3">
+      <widget class="QTableWidget" name="tableWidget_theLoai">
+       <column>
+        <property name="text">
+         <string>Mã Thể Loại</string>
+        </property>
+       </column>
+       <column>
+        <property name="text">
+         <string>Tên Thể Loại</string>
+        </property>
+       </column>
+      </widget>
+     </item>
+     <item row="7" column="1">
+      <spacer name="verticalSpacer_12">
+       <property name="orientation">
+        <enum>Qt::Vertical</enum>
+       </property>
+       <property name="sizeType">
+        <enum>QSizePolicy::Fixed</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>20</width>
+         <height>5</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+    </layout>
+   </item>
+   <item row="0" column="2">
+    <layout class="QGridLayout" name="gridLayout_2">
+     <item row="4" column="2">
+      <widget class="QPushButton" name="pushButton_deleteTacGia">
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">background-color: rgb(237, 94, 104);
+color: rgb(255,255,255)</string>
+       </property>
+       <property name="text">
+        <string>Xóa</string>
+       </property>
+      </widget>
+     </item>
+     <item row="6" column="0" colspan="3">
+      <widget class="QPushButton" name="pushButton_timTacGia">
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">background-color:rgb(154, 164, 192);
+color: rgb(255,255,255)</string>
+       </property>
+       <property name="text">
+        <string>Tìm kiếm</string>
+       </property>
+       <property name="icon">
+        <iconset resource="ql_tp_sach_rsc.qrc">
+         <normaloff>:/icon/icon/search-13-48.ico</normaloff>:/icon/icon/search-13-48.ico</iconset>
+       </property>
+      </widget>
+     </item>
+     <item row="8" column="0" colspan="3">
+      <widget class="QTableWidget" name="tableWidget_TacGia">
+       <column>
+        <property name="text">
+         <string>Mã Tác Giả</string>
+        </property>
+       </column>
+       <column>
+        <property name="text">
+         <string>Tên Tác Giả</string>
+        </property>
+       </column>
+      </widget>
+     </item>
+     <item row="2" column="1" colspan="2">
+      <widget class="QLineEdit" name="lineEdit_tenTacGia">
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+        </font>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="0">
+      <widget class="QLabel" name="label_maTacGia">
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Mã Tác Giả</string>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="0">
+      <widget class="QLabel" name="label_tenTacGia">
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Tên Tác Giả</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="1" colspan="2">
+      <widget class="QLineEdit" name="lineEdit_maTacGia">
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+        </font>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="0">
+      <widget class="QPushButton" name="pushButton_addTacGia">
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">background-color:rgb(85, 195, 186);
+color:rgb(255,255,255)</string>
+       </property>
+       <property name="text">
+        <string>Thêm</string>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="1">
+      <widget class="QPushButton" name="pushButton_editTacGia">
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">background-color: rgb(66, 139, 202);
+color: rgb(255,255,255)</string>
+       </property>
+       <property name="text">
+        <string>Sửa</string>
+       </property>
+      </widget>
+     </item>
+     <item row="5" column="1">
+      <spacer name="verticalSpacer_7">
+       <property name="orientation">
+        <enum>Qt::Vertical</enum>
+       </property>
+       <property name="sizeType">
+        <enum>QSizePolicy::Fixed</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>20</width>
+         <height>5</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item row="3" column="1">
+      <spacer name="verticalSpacer_6">
+       <property name="orientation">
+        <enum>Qt::Vertical</enum>
+       </property>
+       <property name="sizeType">
+        <enum>QSizePolicy::Fixed</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>20</width>
+         <height>5</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item row="1" column="1">
+      <spacer name="verticalSpacer_5">
+       <property name="orientation">
+        <enum>Qt::Vertical</enum>
+       </property>
+       <property name="sizeType">
+        <enum>QSizePolicy::Fixed</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>20</width>
+         <height>5</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item row="7" column="1">
+      <spacer name="verticalSpacer_8">
+       <property name="orientation">
+        <enum>Qt::Vertical</enum>
+       </property>
+       <property name="sizeType">
+        <enum>QSizePolicy::Fixed</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>20</width>
+         <height>5</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+    </layout>
+   </item>
+   <item row="0" column="0">
+    <layout class="QGridLayout" name="gridLayout">
+     <item row="1" column="2">
+      <spacer name="verticalSpacer_2">
+       <property name="orientation">
+        <enum>Qt::Vertical</enum>
+       </property>
+       <property name="sizeType">
+        <enum>QSizePolicy::Fixed</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>20</width>
+         <height>5</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item row="3" column="2">
+      <spacer name="verticalSpacer">
+       <property name="orientation">
+        <enum>Qt::Vertical</enum>
+       </property>
+       <property name="sizeType">
+        <enum>QSizePolicy::Fixed</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>20</width>
+         <height>5</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item row="5" column="3">
+      <widget class="QPushButton" name="pushButton_deletenxb">
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">background-color: rgb(237, 94, 104);
+color: rgb(255,255,255)</string>
+       </property>
+       <property name="text">
+        <string>Xóa</string>
+       </property>
+      </widget>
+     </item>
+     <item row="5" column="2">
+      <widget class="QPushButton" name="pushButton_editnxb">
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">background-color: rgb(66, 139, 202);
+color: rgb(255,255,255)</string>
+       </property>
+       <property name="text">
+        <string>Sửa</string>
+       </property>
+      </widget>
+     </item>
+     <item row="5" column="1">
+      <widget class="QPushButton" name="pushButton_addnxb">
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">background-color:rgb(85, 195, 186);
+color:rgb(255,255,255);</string>
+       </property>
+       <property name="text">
+        <string>Thêm</string>
+       </property>
+      </widget>
+     </item>
+     <item row="7" column="1" colspan="3">
+      <widget class="QPushButton" name="pushButton_timnxb">
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">background-color:rgb(154, 164, 192);
+color: rgb(255,255,255)</string>
+       </property>
+       <property name="text">
+        <string>Tìm kiếm</string>
+       </property>
+       <property name="icon">
+        <iconset resource="ql_tp_sach_rsc.qrc">
+         <normaloff>:/icon/icon/search-13-48.ico</normaloff>:/icon/icon/search-13-48.ico</iconset>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="2" colspan="2">
+      <widget class="QLineEdit" name="lineEdit_tennxb">
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+        </font>
+       </property>
+      </widget>
+     </item>
+     <item row="9" column="1" colspan="3">
+      <widget class="QTableWidget" name="tableWidget_nxb">
+       <column>
+        <property name="text">
+         <string>Mã NXB</string>
+        </property>
+       </column>
+       <column>
+        <property name="text">
+         <string>Tên NXB</string>
+        </property>
+       </column>
+      </widget>
+     </item>
+     <item row="0" column="2" colspan="2">
+      <widget class="QLineEdit" name="lineEdit_manxb">
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+        </font>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="1">
+      <widget class="QLabel" name="label_manxb">
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Mã NXB</string>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="1">
+      <widget class="QLabel" name="label_tennxb">
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Tên NXB</string>
+       </property>
+      </widget>
+     </item>
+     <item row="6" column="2">
+      <spacer name="verticalSpacer_3">
+       <property name="orientation">
+        <enum>Qt::Vertical</enum>
+       </property>
+       <property name="sizeType">
+        <enum>QSizePolicy::Fixed</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>20</width>
+         <height>5</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item row="8" column="2">
+      <spacer name="verticalSpacer_4">
+       <property name="orientation">
+        <enum>Qt::Vertical</enum>
+       </property>
+       <property name="sizeType">
+        <enum>QSizePolicy::Fixed</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>20</width>
+         <height>5</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+    </layout>
+   </item>
+  </layout>
  </widget>
- <resources/>
+ <resources>
+  <include location="ql_tp_sach_rsc.qrc"/>
+ </resources>
  <connections/>
 </ui>

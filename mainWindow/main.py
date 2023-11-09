@@ -2,9 +2,18 @@ import sys
 from PyQt5.QtWidgets import QMainWindow, QApplication, QPushButton, QWidget, QTableWidgetItem, QHeaderView
 from PyQt5.QtCore import pyqtSlot, QFile, QTextStream
 
-from mainwindow.sidebar_ui import Ui_MainWindow
+from mainwindow.Ui_sidebar import Ui_MainWindow
 from mainwindow.Ui_qlsach import Ui_Form
+from mainwindow.Ui_ql_tp_sach import Ui_ql_tp_sach
 from connector.mySql import mydb
+
+class ql_tp_sach(QWidget):
+    def __init__ (self):
+        super(ql_tp_sach,self). __init__()
+        self.ui = Ui_ql_tp_sach()
+        self.ui.setupUi(self)
+    
+        
 
 class qlsach(QWidget):
     def __init__ (self):
@@ -28,6 +37,13 @@ class qlsach(QWidget):
             self.ui.tableWidget.setItem(tablerow, 4, QTableWidgetItem(row[4]))
             self.ui.tableWidget.setItem(tablerow, 5, QTableWidgetItem(row[5]))
             tablerow+=1
+    
+    def redirect_to_ql_tp(self):
+        QWidget.setVisible(self, False)
+        self.tp = ql_tp_sach()
+        self.tp.exec_()
+        self.show()          
+    
 
 class MainWindow(QMainWindow):
     def __init__(self):
@@ -39,8 +55,9 @@ class MainWindow(QMainWindow):
         self.ui.setupUi(self)
 
         self.qlsach =qlsach()
-        self.ui.gridLayout_4.addWidget(self.qlsach,0,1,1,1)
-
+        self.ui.gridLayout_4.addWidget(self.qlsach,0,0,1,1)
+        self.ql_tp = ql_tp_sach()
+        self.ui.gridLayout_9.addWidget(self.ql_tp, 0,0,1,1)
         self.ui.icon_only_widget.hide()
         self.ui.stackedWidget.setCurrentIndex(0)
         self.ui.home_btn_2.setChecked(True)
@@ -106,6 +123,12 @@ class MainWindow(QMainWindow):
 
     def on_customers_btn_2_toggled(self):
         self.ui.stackedWidget.setCurrentIndex(4)
+        
+    def on_pushButton_toggled(self):
+        self.ui.stackedWidget.setCurrentIndex(7)
+
+    def on_pushButton_2_toggled(self):
+        self.ui.stackedWidget.setCurrentIndex(7)
 
 
 if __name__ == "__main__":
