@@ -71,6 +71,9 @@
    <layout class="QGridLayout" name="gridLayout_9">
     <item row="0" column="0">
      <widget class="QTableWidget" name="tableWidget">
+      <attribute name="verticalHeaderVisible">
+       <bool>false</bool>
+      </attribute>
       <column>
        <property name="text">
         <string>Mã Sách</string>
@@ -124,7 +127,7 @@
     </item>
    </layout>
   </widget>
-  <widget class="QWidget" name="">
+  <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
      <x>0</x>
