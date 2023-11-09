@@ -1,9 +1,9 @@
 import sys
-from PyQt5.QtWidgets import QMainWindow, QApplication, QPushButton, QWidget, QTableWidgetItem
+from PyQt5.QtWidgets import QMainWindow, QApplication, QPushButton, QWidget, QTableWidgetItem, QHeaderView
 from PyQt5.QtCore import pyqtSlot, QFile, QTextStream
 
 from mainwindow.sidebar_ui import Ui_MainWindow
-from mainwindow.ql_sach import Ui_Form
+from mainwindow.Ui_qlsach import Ui_Form
 from connector.mySql import mydb
 
 class qlsach(QWidget):
@@ -11,15 +11,16 @@ class qlsach(QWidget):
         super(qlsach,self). __init__()
         self.ui = Ui_Form()
         self.ui.setupUi(self)
+        self.ui.tableWidget.horizontalHeader().setSectionResizeMode(5, QHeaderView.ResizeToContents)
         self.handleLoadSach()
         
     def handleLoadSach(self):
         
         db=mydb()
-        
+        data = db.handleLoadSach()
+        self.ui.tableWidget.setRowCount(len(data))
         tablerow=0
-        self.ui.tableWidget.setRowCount(40)
-        for row in db.handleLoadSach():
+        for row in data:
             self.ui.tableWidget.setItem(tablerow, 0, QTableWidgetItem(str(row[0])))
             self.ui.tableWidget.setItem(tablerow, 1, QTableWidgetItem(row[1]))
             self.ui.tableWidget.setItem(tablerow, 2, QTableWidgetItem(row[2]))
