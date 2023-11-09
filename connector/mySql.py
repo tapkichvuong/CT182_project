@@ -13,12 +13,47 @@ class mydb:
             database = "qlthuvien"
         )
     # Printing the connection object 
+
+    # lay du lieu cua ban sach
     def handleLoadSach(self):
         cursor = self.mydb.cursor()
         sql= "select sach.masach,sach.tensach,nxb.tennxb,tacgia.tentacgia,theloai.tenloai,sach.mota,sach.masach from sach join tacgia on tacgia.matacgia=sach.matacgia join nxb on nxb.manxb=sach.manxb join theloai on theloai.maloai=sach.maloai order by masach"
         cursor.execute(sql)
         results =cursor.fetchall()
         return results
+    #xu ly them sach
+    #xu ly xoa sach
+    #xu ly cap nhat sach
+    #xu ly tim sach
+
+    #lay du lieu cua ban NXB
+    def handleLoadNXB(self):
+        cursor = self.mydb.cursor()
+        sql= "select * from nxb"
+        results =cursor.fetchall()
+        return results
+    #xu ly them nxb
+    #xu ly xoa nxb
+    #xu ly cap nhat nxb
+    #xu ly tim xnb
+
+    #lay du lieu cua ban Tac Gia
+    def handleLoadTacGia(self):
+        cursor = self.mydb.cursor()
+        sql= "select * from tacgia"
+        results =cursor.fetchall()
+        return results  
+    #xu ly them tac gia
+    #xu ly xoa tac gia
+    #xu ly cap nhat tac gia
+    #xu ly tim tac gia
+    
+    #lay du lieu cua ban The Loai
+    def handleLoadTheLoai(self):
+        cursor = self.mydb.cursor()
+        sql= "select * from theloai"
+        results =cursor.fetchall()
+        return results  
     # xu li dang ky
     def handleRegister(self, account):
         try:
