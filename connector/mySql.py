@@ -30,8 +30,10 @@ class mydb:
     def handleLoadNXB(self):
         cursor = self.mydb.cursor()
         sql= "select * from nxb"
-        results =cursor.fetchall()
-        return results
+        cursor.execute(sql)
+        nxb =cursor.fetchall()
+        return nxb
+      
     #xu ly them nxb
     #xu ly xoa nxb
     #xu ly cap nhat nxb
@@ -41,19 +43,26 @@ class mydb:
     def handleLoadTacGia(self):
         cursor = self.mydb.cursor()
         sql= "select * from tacgia"
+        cursor.execute(sql)
         results =cursor.fetchall()
         return results  
     #xu ly them tac gia
     #xu ly xoa tac gia
     #xu ly cap nhat tac gia
     #xu ly tim tac gia
-    
+
     #lay du lieu cua ban The Loai
     def handleLoadTheLoai(self):
         cursor = self.mydb.cursor()
         sql= "select * from theloai"
-        results =cursor.fetchall()
-        return results  
+        cursor.execute(sql)
+        theloai =cursor.fetchall()
+        return theloai
+    #xu ly them the loai
+    #xu ly xoa the loai
+    #xu ly cap nhat loai
+    #xu ly tim the loai
+
     # xu li dang ky
     def handleRegister(self, account):
         try:
