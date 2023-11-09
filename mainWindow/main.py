@@ -2,8 +2,8 @@ import sys
 from PyQt5.QtWidgets import QMainWindow, QApplication, QPushButton,QWidget
 from PyQt5.QtCore import pyqtSlot, QFile, QTextStream
 
-from sidebar_ui import Ui_MainWindow
-from ql_sach import Ui_Form
+from mainwindow.sidebar_ui import Ui_MainWindow
+from mainwindow.ql_sach import Ui_Form
 
 class qlsach(QWidget):
     def __init__ (self):

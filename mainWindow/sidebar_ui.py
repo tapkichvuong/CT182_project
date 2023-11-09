@@ -14,7 +14,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(950, 600)
+        MainWindow.resize(1000, 810)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.gridLayout = QtWidgets.QGridLayout(self.centralwidget)
@@ -351,4 +351,4 @@ class Ui_MainWindow(object):
         self.label_8.setText(_translate("MainWindow", "Độc giả Page"))
         self.label_9.setText(_translate("MainWindow", "Search Page"))
         self.label_10.setText(_translate("MainWindow", "User Page"))
-import resource_rc
+from mainwindow import resource_rc
