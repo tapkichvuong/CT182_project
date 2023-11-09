@@ -3,6 +3,7 @@ from PyQt5.QtWidgets import (QApplication, QDialog, QMessageBox, QLineEdit)
 from PyQt5.QtCore import QFile, QTextStream
 from login.Ui_RegisterWindow import Ui_Form
 from connector.mySql import mydb
+
 class RegisterForm(QDialog):
     def __init__(self):
         super(RegisterForm, self).__init__()
@@ -72,7 +73,7 @@ class RegisterForm(QDialog):
             msg.information(self,'Success', 'Account have been created')
             self.close_window()
         else:
-            msg.setIcon(QMessageBox.Error)
+            msg.setIcon(QMessageBox.Critical)
             msg.information(self,'Failed', 'Account already exists')
         
     def toggleVisibility(self):

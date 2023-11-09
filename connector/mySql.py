@@ -2,6 +2,8 @@
 import mysql.connector
 from mysql.connector import Error
 from hashlib import sha256
+import random
+import string
 
 class mydb:
     def __init__(self):
@@ -22,6 +24,10 @@ class mydb:
             hash_pass = sha256(account['pass'].encode('utf-8')).hexdigest()
             print(hash_pass)
             val = (account['username'], hash_pass)
+            cursor.execute(sql, val)
+            madocgia = self.generate_random_string()
+            sql = "INSERT INTO docgia (madocgia, firstname, lastname, phone, email, username) VALUES (%s, %s, %s, %s, %s, %s)"
+            val = (madocgia, account['firstName'], account['lastName'], account['phone'], account['email'], account['username'])
             cursor.execute(sql, val)
             cursor.close()
             self.mydb.commit()
@@ -57,8 +63,14 @@ class mydb:
             val = (username,)
             cursor.execute(sql, val)
             madocgia = cursor.fetchone()
+            print(madocgia)
             return madocgia[0]
         except Error as e:
             print(e)
         finally:
             self.mydb.close()
+            
+    def generate_random_string(self):
+        characters = string.ascii_letters + string.digits  # Use uppercase letters and digits
+        random_string = ''.join(random.choice(characters) for _ in range(8))
+        return random_string
