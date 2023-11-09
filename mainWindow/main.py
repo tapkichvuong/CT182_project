@@ -22,7 +22,25 @@ class qlsach(QWidget):
         self.ui.setupUi(self)
         self.ui.tableWidget.horizontalHeader().setSectionResizeMode(5, QHeaderView.ResizeToContents)
         self.handleLoadSach()
-        
+        self.handleLoadTacGia_CBB()
+        self.handleLoadNXB_CBB()
+        self.handleLoadTheLoai_CBB()
+
+    def handleLoadTacGia_CBB(self):
+        db= mydb()
+        tacgia=db.handleLoadTacGia()
+        for tacgia in tacgia:
+            self.ui.comboBox_1.addItem(str(tacgia[1]))
+    def handleLoadNXB_CBB(self):
+        db= mydb()
+        nxb=db.handleLoadNXB()
+        for nxb in nxb:
+            self.ui.comboBox_2.addItem(str(nxb[1]))
+    def handleLoadTheLoai_CBB(self):
+        db= mydb()
+        tl=db.handleLoadTheLoai()
+        for tl in tl:
+            self.ui.comboBox_3.addItem(str(tl[1]))
     def handleLoadSach(self):
         
         db=mydb()

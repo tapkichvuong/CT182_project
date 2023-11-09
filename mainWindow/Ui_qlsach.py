@@ -16,36 +16,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 
 
 
-class Ui_Form(object):
-    def handleLoadTacGia_CBB(self):
-        db= mydb()
-        tacgia=db.handleLoadTacGia()
-        for tacgia in tacgia:
-            self.comboBox_1.addItem(str(tacgia[1]))
-    def handleLoadNXB_CBB(self):
-        db= mydb()
-        nxb=db.handleLoadNXB()
-        for nxb in nxb:
-            self.comboBox_2.addItem(str(nxb[1]))
-    def handleLoadTheLoai_CBB(self):
-        db= mydb()
-        tl=db.handleLoadTheLoai()
-        for tl in tl:
-            self.comboBox_3.addItem(str(tl[1]))
-    def handleLoadSach(self):
-        
-        db=mydb()
-        
-        tablerow=0
-        self.tableWidget.setRowCount(40)
-        for row in db.handleLoadSach():
-            self.tableWidget.setItem(tablerow, 0, QtWidgets.QTableWidgetItem(str(row[0])))
-            self.tableWidget.setItem(tablerow, 1, QtWidgets.QTableWidgetItem(row[1]))
-            self.tableWidget.setItem(tablerow, 2, QtWidgets.QTableWidgetItem(row[2]))
-            self.tableWidget.setItem(tablerow, 3, QtWidgets.QTableWidgetItem(row[3]))
-            self.tableWidget.setItem(tablerow, 4, QtWidgets.QTableWidgetItem(row[4]))
-            self.tableWidget.setItem(tablerow, 5, QtWidgets.QTableWidgetItem(row[5]))
-            tablerow+=1         
+class Ui_Form(object):  
     def setupUi(self, Form):
         Form.setObjectName("Form")
         Form.resize(815, 720)
@@ -83,9 +54,6 @@ class Ui_Form(object):
         self.comboBox_1 = QtWidgets.QComboBox(Form)
         self.comboBox_1.setObjectName("comboBox_1")
         self.gridLayout_3.addWidget(self.comboBox_1, 0, 1, 1, 1)
-        #
-        self.handleLoadTacGia_CBB()
-        # 
         self.label_3 = QtWidgets.QLabel(Form)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred)
         sizePolicy.setHorizontalStretch(0)
@@ -104,9 +72,6 @@ class Ui_Form(object):
         self.comboBox_2 = QtWidgets.QComboBox(Form)
         self.comboBox_2.setObjectName("comboBox_2")
         self.gridLayout_6.addWidget(self.comboBox_2, 0, 1, 1, 1)
-        #
-        self.handleLoadNXB_CBB()
-        # 
         self.gridLayout_8.addLayout(self.gridLayout_6, 3, 0, 1, 1)
         self.gridLayout_7 = QtWidgets.QGridLayout()
         self.gridLayout_7.setObjectName("gridLayout_7")
@@ -116,9 +81,6 @@ class Ui_Form(object):
         self.comboBox_3 = QtWidgets.QComboBox(Form)
         self.comboBox_3.setObjectName("comboBox_3")
         self.gridLayout_7.addWidget(self.comboBox_3, 0, 1, 1, 1)
-        #
-        self.handleLoadTheLoai_CBB()
-        # 
         self.gridLayout_8.addLayout(self.gridLayout_7, 4, 0, 1, 1)
         self.gridLayout_5.addLayout(self.gridLayout_8, 0, 0, 1, 1)
         self.gridLayout_4 = QtWidgets.QGridLayout()
@@ -171,7 +133,6 @@ class Ui_Form(object):
         item = QtWidgets.QTableWidgetItem()
         self.tableWidget.setHorizontalHeaderItem(5, item)
         self.tableWidget.verticalHeader().setVisible(False)
-        self.handleLoadSach()
         self.gridLayout_9.addWidget(self.tableWidget, 0, 0, 1, 1)
         self.gridLayout_10.addLayout(self.gridLayout_9, 3, 0, 1, 1)
 
@@ -190,7 +151,7 @@ class Ui_Form(object):
         self.pushButton_4.setText(_translate("Form", "Thêm"))
         self.pushButton_3.setText(_translate("Form", "Cập Nhật"))
         self.pushButton_2.setText(_translate("Form", "Xoá"))
-        self.pushButton.setText(_translate("Form", "Tìm Kimếm"))
+        self.pushButton.setText(_translate("Form", "Tìm Kiếm"))
         self.pushButton_5.setText(_translate("Form", "QL Tác Giả,NXB,Thể Loại"))
         item = self.tableWidget.horizontalHeaderItem(0)
         item.setText(_translate("Form", "Mã Sách"))
