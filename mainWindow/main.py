@@ -2,18 +2,21 @@ import sys
 from PyQt5.QtWidgets import QMainWindow, QApplication, QPushButton,QWidget
 from PyQt5.QtCore import pyqtSlot, QFile, QTextStream
 
-from sidebar_ui import Ui_MainWindow
-from ql_sach import Ui_Form
+from mainwindow.sidebar_ui import Ui_MainWindow
+from mainwindow.ql_sach import Ui_Form
 
 class qlsach(QWidget):
     def __init__ (self):
         super(qlsach,self). __init__()
         self.ui = Ui_Form()
         self.ui.setupUi(self)
+        
 class MainWindow(QMainWindow):
     def __init__(self):
         super(MainWindow, self).__init__()
-
+        #get login user
+        self.logged_in_user = None
+        #create GUI
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
 
@@ -24,6 +27,14 @@ class MainWindow(QMainWindow):
         self.ui.stackedWidget.setCurrentIndex(0)
         self.ui.home_btn_2.setChecked(True)
 
+    ## lay ma doc gia
+    def login(self, login_instance):
+        if login_instance:
+            self.logged_in_user = login_instance
+            print(f"Logged in as {self.logged_in_user}")
+        else:
+            print("Authentication failed.")
+    
     ## Function for searching
     def on_search_btn_clicked(self):
         self.ui.stackedWidget.setCurrentIndex(5)

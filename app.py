@@ -22,6 +22,8 @@ while True:
     loginWindow = LoginForm()
     if loginWindow.exec_() == QDialog.Accepted:
         win = MainWindow()
+        # truyen ma doc gia vao main
+        win.login(loginWindow.madocgia)
         win.show()
         app.exec_()
     
