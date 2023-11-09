@@ -1,7 +1,7 @@
 <RCC>
   <qresource prefix="icon">
-    <file>../icon/manage.ico</file>
     <file>../icon/account-logout-64.ico</file>
+    <file>../icon/binders-48.ico</file>
     <file>../icon/activity-feed-32.ico</file>
     <file>../icon/activity-feed-48.ico</file>
     <file>../icon/close-window-64.ico</file>

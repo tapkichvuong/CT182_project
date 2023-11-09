@@ -12,7 +12,9 @@ class ql_tp_sach(QWidget):
         super(ql_tp_sach,self). __init__()
         self.ui = Ui_ql_tp_sach()
         self.ui.setupUi(self)
-    
+        self.ui.tableWidget_nxb.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
+        self.ui.tableWidget_TacGia.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
+        self.ui.tableWidget_theLoai.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
         
 
 class qlsach(QWidget):

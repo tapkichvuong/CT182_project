@@ -206,12 +206,12 @@
            </property>
            <property name="icon">
             <iconset resource="resource.qrc">
-             <normaloff>:/icon/icon/manage.ico</normaloff>:/icon/icon/manage.ico</iconset>
+             <normaloff>:/icon/icon/binders-48.ico</normaloff>:/icon/icon/binders-48.ico</iconset>
            </property>
            <property name="iconSize">
             <size>
-             <width>30</width>
-             <height>30</height>
+             <width>20</width>
+             <height>20</height>
             </size>
            </property>
            <property name="checkable">
@@ -433,6 +433,10 @@
           <widget class="QPushButton" name="pushButton">
            <property name="text">
             <string>Quản lí thành phần</string>
+           </property>
+           <property name="icon">
+            <iconset resource="resource.qrc">
+             <normaloff>:/icon/icon/binders-48.ico</normaloff>:/icon/icon/binders-48.ico</iconset>
            </property>
            <property name="checkable">
             <bool>true</bool>
