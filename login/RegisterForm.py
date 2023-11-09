@@ -22,9 +22,9 @@ class RegisterForm(QDialog):
         password = self.ui.lineEdit_pass.text()
         confirmPass = self.ui.lineEdit_confirmPass.text()
         msg = QMessageBox()
+        #Xu li neu phat hien co truong bi trong
         if not firstName:
             msg.setIcon(QMessageBox.Warning)
-            
             msg.warning(self, 'Error', 'First Name is empty')
             return
         if not lastName:
@@ -55,6 +55,7 @@ class RegisterForm(QDialog):
             msg.setIcon(QMessageBox.Warning)
             msg.warning(self, 'Error', 'Password and confirm password are not the same')
             return
+        #tao doi tuong tai khoan
         account = {}
         account['firstName'] = firstName
         account['lastName'] = firstName
@@ -63,10 +64,16 @@ class RegisterForm(QDialog):
         account['username'] = username
         account['pass'] = password
         db = mydb()
-        db.handleRegister(account)
-        msg.setIcon(QMessageBox.Information)
-        msg.information(self,'Success', 'Account have been created')
-        self.close_window()
+        checked = db.handleRegister(account)
+        print(checked)
+        #xu li accout da ton tai trong co so du lieu
+        if(checked):
+            msg.setIcon(QMessageBox.Information)
+            msg.information(self,'Success', 'Account have been created')
+            self.close_window()
+        else:
+            msg.setIcon(QMessageBox.Error)
+            msg.information(self,'Failed', 'Account already exists')
         
     def toggleVisibility(self):
         if self.ui.lineEdit_pass.echoMode()==QLineEdit.Normal:

@@ -7,7 +7,9 @@ from connector.mySql import mydb
 class LoginForm(QDialog):
     def __init__(self):
         super(LoginForm, self).__init__()
-
+        # create login instance
+        self.madocgia = None
+        #create GUI
         self.ui = Ui_Form()
         self.ui.setupUi(self)
         self.ui.LoginBtn.clicked.connect(self.handleLogin)
@@ -23,12 +25,17 @@ class LoginForm(QDialog):
     def handleLogin(self):
         msg = QMessageBox()
         db = mydb()
-        checkPass = db.handleLogin(self.ui.lineEdit_name.text(), self.ui.lineEdit_pass.text())
+        inputUsername = self.ui.lineEdit_name.text()
+        inputPassword = self.ui.lineEdit_pass.text()
+        checkPass = db.handleLogin(inputUsername, inputPassword)
+        # neu dang nhap thanh cong thi luu ma doc gia cua nguoi dung de su dung trong main class
         if checkPass:
+            madocgia = db.authenticate(inputUsername)
+            self.madocgia = madocgia
             self.accept()
         else:
             msg.warning(self, 'Error', 'username or password is not correct')
-    
+        
     def redirect_to_register(self):
         QWidget.setVisible(self, False)
         self.register = RegisterForm()
