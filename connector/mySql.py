@@ -9,10 +9,10 @@ class mydb:
     def __init__(self):
     # Creating connection object
         self.mydb = mysql.connector.connect(
-            host = "127.0.0.1",
+            host = "localhost",
             user = "root",
-            password = "Minhhuy2310@",
-            database = "librarydb"
+            password = "123456",
+            database = "qlthuvien"
         )
     # Printing the connection object 
 
@@ -31,6 +31,28 @@ class mydb:
         results =cursor.fetchall()
         return results
     #xu ly them sach
+    def handleThemSach(self,sach):
+        try:
+            cursor = self.mydb.cursor()
+            sql = "INSERT INTO sach (tensach, matacgia, manxb, maloai , mota) VALUES (%s, %s, %s, %s, %s)"
+            val = (sach['tensach'], sach['matacgia'], sach['manxb'],sach['maloai'], sach['mota'])
+            cursor.execute(sql, val)
+            print(val)
+            # print(cursor)
+            cursor.close()
+            self.mydb.commit()
+            
+            return True
+        except Error  as e:
+            
+            if "1062" in str(e):
+                print("Error: Duplicate entry detected!")
+                return False
+            else:
+                print("Error:", e)
+                return False
+        finally:
+            self.mydb.close() 
     #xu ly xoa sach
     #xu ly cap nhat sach
     #xu ly tim sach
@@ -84,6 +106,7 @@ class mydb:
         sql= "select * from theloai"
         cursor.execute(sql)
         theloai =cursor.fetchall()
+
         return theloai
     #xu ly them the loai
     #xu ly xoa the loai

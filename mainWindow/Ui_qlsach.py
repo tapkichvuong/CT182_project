@@ -11,12 +11,14 @@ import sys
 from PyQt5.uic import loadUi
 from PyQt5.QtWidgets import (QApplication, QDialog, QMessageBox, QLineEdit, QWidget)
 from connector.mySql import mydb
+
 import mysql.connector
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 
-
-class Ui_Form(object):  
+    
+class Ui_Form(object):
+    
     def setupUi(self, Form):
         Form.setObjectName("Form")
         Form.resize(815, 720)
@@ -45,9 +47,9 @@ class Ui_Form(object):
         self.label_2 = QtWidgets.QLabel(Form)
         self.label_2.setObjectName("label_2")
         self.gridLayout_2.addWidget(self.label_2, 0, 0, 1, 1)
-        self.lineEdit_2 = QtWidgets.QLineEdit(Form)
-        self.lineEdit_2.setObjectName("lineEdit_2")
-        self.gridLayout_2.addWidget(self.lineEdit_2, 0, 1, 1, 1)
+        self.lineEdit_tensach = QtWidgets.QLineEdit(Form)
+        self.lineEdit_tensach.setObjectName("lineEdit_tensach")
+        self.gridLayout_2.addWidget(self.lineEdit_tensach, 0, 1, 1, 1)
         self.gridLayout_8.addLayout(self.gridLayout_2, 1, 0, 1, 1)
         self.gridLayout_3 = QtWidgets.QGridLayout()
         self.gridLayout_3.setObjectName("gridLayout_3")
@@ -88,16 +90,16 @@ class Ui_Form(object):
         self.label_4 = QtWidgets.QLabel(Form)
         self.label_4.setObjectName("label_4")
         self.gridLayout_4.addWidget(self.label_4, 0, 0, 1, 1)
-        self.plainTextEdit = QtWidgets.QPlainTextEdit(Form)
-        self.plainTextEdit.setObjectName("plainTextEdit")
-        self.gridLayout_4.addWidget(self.plainTextEdit, 0, 1, 1, 1)
+        self.lineEdit_10 = QtWidgets.QLineEdit(Form)
+        self.lineEdit_10.setObjectName("lineEdit_10")
+        self.gridLayout_4.addWidget(self.lineEdit_10, 0, 1, 1, 1)
         self.gridLayout_5.addLayout(self.gridLayout_4, 0, 1, 1, 1)
         self.gridLayout_10.addLayout(self.gridLayout_5, 0, 0, 1, 1)
         self.horizontalLayout = QtWidgets.QHBoxLayout()
         self.horizontalLayout.setObjectName("horizontalLayout")
-        self.pushButton_4 = QtWidgets.QPushButton(Form)
-        self.pushButton_4.setObjectName("pushButton_4")
-        self.horizontalLayout.addWidget(self.pushButton_4)
+        self.pushButton_them = QtWidgets.QPushButton(Form)
+        self.pushButton_them.setObjectName("pushButton_them")
+        self.horizontalLayout.addWidget(self.pushButton_them)
         self.pushButton_3 = QtWidgets.QPushButton(Form)
         self.pushButton_3.setObjectName("pushButton_3")
         self.horizontalLayout.addWidget(self.pushButton_3)
@@ -135,7 +137,8 @@ class Ui_Form(object):
         self.tableWidget.verticalHeader().setVisible(False)
         self.gridLayout_9.addWidget(self.tableWidget, 0, 0, 1, 1)
         self.gridLayout_10.addLayout(self.gridLayout_9, 3, 0, 1, 1)
-
+        
+        
         self.retranslateUi(Form)
         QtCore.QMetaObject.connectSlotsByName(Form)
 
@@ -148,7 +151,7 @@ class Ui_Form(object):
         self.label_6.setText(_translate("Form", "NXB"))
         self.label_7.setText(_translate("Form", "Thể Loại"))
         self.label_4.setText(_translate("Form", "Mô Tả"))
-        self.pushButton_4.setText(_translate("Form", "Thêm"))
+        self.pushButton_them.setText(_translate("Form", "Thêm"))
         self.pushButton_3.setText(_translate("Form", "Cập Nhật"))
         self.pushButton_2.setText(_translate("Form", "Xoá"))
         self.pushButton.setText(_translate("Form", "Tìm Kiếm"))

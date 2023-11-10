@@ -48,7 +48,7 @@ class ql_tp_sach(QWidget):
         self.handleLoadNXB_table()
         self.handleLoadTacGia_table()
         self.handleLoadTheLoai_table()
-        
+       
     def handleLoadTacGia_table(self):
         db= mydb()
         tacgia=db.handleLoadTacGia()
@@ -84,6 +84,8 @@ class qlsach(QWidget):
         self.ui = Ui_Form()
         self.ui.setupUi(self)
         self.ui.tableWidget.horizontalHeader().setSectionResizeMode(5, QHeaderView.ResizeToContents)
+        self.ui.pushButton_them.clicked.connect(self.addnewbook)
+        self.ui.pushButton_them.clicked.connect(self.handleLoadSach)
         self.handleLoadSach()
         self.handleLoadTacGia_CBB()
         self.handleLoadNXB_CBB()
@@ -91,26 +93,45 @@ class qlsach(QWidget):
         self.main_window_instance = main_window_instance
         self.ui.pushButton_5.clicked.connect(self.redirect_to_ql_tp)
         self.ui.pushButton.clicked.connect(self.handleSearching)
+    def addnewbook(self):
+        tensach = self.ui.lineEdit_tensach.text()
+        matacgia = self.ui.comboBox_1.currentIndex()
+        manxb = self.ui.comboBox_2.currentIndex()
+        matheloai = self.ui.comboBox_3.currentIndex()
+        mota = self.ui.lineEdit_10.text()
+        
+        #them sach
+        sach = {}
+        sach['tensach'] = tensach
+        sach['matacgia'] = matacgia
+        sach['manxb'] = manxb
+        sach['maloai'] = matheloai
+        sach['mota'] = mota
+        db = mydb()
+        checked = db.handleThemSach(sach)
+        
+        
+        
+        
 
     def handleLoadTacGia_CBB(self):
         db= mydb()
         tacgia=db.handleLoadTacGia()
         self.ui.comboBox_1.addItem('')
         for tacgia in tacgia:
-            self.ui.comboBox_1.addItem(str(tacgia[1]))
+            self.ui.comboBox_1.addItem(str(tacgia[1]),str(tacgia[0]))
     def handleLoadNXB_CBB(self):
         db= mydb()
         nxb=db.handleLoadNXB()
         self.ui.comboBox_2.addItem('')
         for nxb in nxb:
-            self.ui.comboBox_2.addItem(str(nxb[1]))
+            self.ui.comboBox_2.addItem(str(nxb[1]),str(nxb[0]))
     def handleLoadTheLoai_CBB(self):
         db= mydb()
         tl=db.handleLoadTheLoai()
         self.ui.comboBox_3.addItem('')
         for tl in tl:
-            self.ui.comboBox_3.addItem(str(tl[1]))
-            
+            self.ui.comboBox_3.addItem(str(tl[1]),int(str(tl[0])))
     def handleLoadSach(self):
         db=mydb()
         data = db.handleLoadSach()
