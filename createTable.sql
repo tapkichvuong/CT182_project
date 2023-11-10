@@ -45,12 +45,12 @@ create table tacgia(
 );
 
 create table sach(
-	masach int primary key,
-    tensach varchar(50),
-    matacgia int,
-    manxb int,
-    maloai int, 
-    mota varchar(300),
+	masach int primary key auto_increment,
+    tensach varchar(50) NOT NULL,
+    matacgia int NOT NULL,
+    manxb int NOT NULL,
+    maloai int NOT NULL, 
+    mota varchar(300) NOT NULL,
     CONSTRAINT FK_sachnxb FOREIGN KEY (matacgia) REFERENCES tacgia(matacgia),
     CONSTRAINT FK_sachtheloai FOREIGN KEY (manxb) REFERENCES nxb(manxb),
     CONSTRAINT FK_sachtacgia FOREIGN KEY (maloai) REFERENCES theloai(maloai)
