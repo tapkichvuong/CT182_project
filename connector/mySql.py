@@ -11,8 +11,8 @@ class mydb:
         self.mydb = mysql.connector.connect(
             host = "localhost",
             user = "root",
-            password = "123456",
-            database = "qlthuvien"
+            password = "Minhhuy2310@",
+            database = "librarydb"
         )
     # Printing the connection object 
 
@@ -56,21 +56,23 @@ class mydb:
     #xu ly xoa sach
     #xu ly cap nhat sach
     #xu ly tim sach
-    def handleTimSach(self, tacgia, nxb, theloai):
+    def handleTimSach(self, masach, tensach, tacgia, nxb, theloai):
         cursor = self.mydb.cursor()
         sql = """
-                SELECT sach.masach, sach.tensach, nxb.tennxb, tacgia.tentacgia, theloai.tenloai, sach.mota, sach.masach
+                SELECT sach.masach, sach.tensach, nxb.tennxb, tacgia.tentacgia, theloai.tenloai, sach.mota
                 FROM sach
                     JOIN tacgia ON tacgia.matacgia = sach.matacgia
                     JOIN nxb ON nxb.manxb = sach.manxb
                     JOIN theloai ON theloai.maloai = sach.maloai
-                WHERE tacgia.tentacgia LIKE %s
+                WHERE  sach.masach LIKE %s
+                    AND sach.tensach LIKE %s
+                    AND tacgia.tentacgia LIKE %s
                     AND nxb.tennxb LIKE %s
                     AND theloai.tenloai LIKE %s
                 ORDER BY masach
             """
-        val = (f'%{tacgia}%', f'%{nxb}%', f'%{theloai}%')
-        print(tacgia, nxb, theloai)
+        val = (f'{masach}%', f'{tensach}%', f'%{tacgia}%', f'%{nxb}%', f'%{theloai}%')
+        print(masach, tensach, tacgia, nxb, theloai)
         cursor.execute(sql, val)
         results =cursor.fetchall()
         print(results)

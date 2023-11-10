@@ -148,11 +148,12 @@ class qlsach(QWidget):
     #ham tim kiem sach
     def handleSearching(self):
         db=mydb()
+        masach = self.ui.lineEdit.text().strip()
+        tensach = self.ui.lineEdit_tensach.text().strip()
         tacgia = self.ui.comboBox_1.currentText()
         nxb = self.ui.comboBox_2.currentText()
         theloai = self.ui.comboBox_3.currentText()
-        data = db.handleTimSach(tacgia, nxb, theloai)
-        print(data)
+        data = db.handleTimSach(masach, tensach, tacgia, nxb, theloai)
         self.ui.tableWidget.setRowCount(len(data))
         tablerow=0
         for row in data:
