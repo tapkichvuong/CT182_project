@@ -67,20 +67,24 @@ class qlsach(QWidget):
         self.handleLoadTheLoai_CBB()
         self.main_window_instance = main_window_instance
         self.ui.pushButton_5.clicked.connect(self.redirect_to_ql_tp)
+        self.ui.pushButton.clicked.connect(self.handleSearching)
 
     def handleLoadTacGia_CBB(self):
         db= mydb()
         tacgia=db.handleLoadTacGia()
+        self.ui.comboBox_1.addItem('')
         for tacgia in tacgia:
             self.ui.comboBox_1.addItem(str(tacgia[1]))
     def handleLoadNXB_CBB(self):
         db= mydb()
         nxb=db.handleLoadNXB()
+        self.ui.comboBox_2.addItem('')
         for nxb in nxb:
             self.ui.comboBox_2.addItem(str(nxb[1]))
     def handleLoadTheLoai_CBB(self):
         db= mydb()
         tl=db.handleLoadTheLoai()
+        self.ui.comboBox_3.addItem('')
         for tl in tl:
             self.ui.comboBox_3.addItem(str(tl[1]))
             
@@ -97,7 +101,25 @@ class qlsach(QWidget):
             self.ui.tableWidget.setItem(tablerow, 4, QTableWidgetItem(row[4]))
             self.ui.tableWidget.setItem(tablerow, 5, QTableWidgetItem(row[5]))
             tablerow+=1
-    
+    #ham tim kiem sach
+    def handleSearching(self):
+        db=mydb()
+        tacgia = self.ui.comboBox_1.currentText()
+        nxb = self.ui.comboBox_2.currentText()
+        theloai = self.ui.comboBox_3.currentText()
+        data = db.handleTimSach(tacgia, nxb, theloai)
+        print(data)
+        self.ui.tableWidget.setRowCount(len(data))
+        tablerow=0
+        for row in data:
+            self.ui.tableWidget.setItem(tablerow, 0, QTableWidgetItem(str(row[0])))
+            self.ui.tableWidget.setItem(tablerow, 1, QTableWidgetItem(row[1]))
+            self.ui.tableWidget.setItem(tablerow, 2, QTableWidgetItem(row[2]))
+            self.ui.tableWidget.setItem(tablerow, 3, QTableWidgetItem(row[3]))
+            self.ui.tableWidget.setItem(tablerow, 4, QTableWidgetItem(row[4]))
+            self.ui.tableWidget.setItem(tablerow, 5, QTableWidgetItem(row[5]))
+            tablerow+=1
+        
     def redirect_to_ql_tp(self):
         # Change the stackedWidget index in MainWindow to 7
         self.main_window_instance.ui.orders_btn_1.setChecked(False)

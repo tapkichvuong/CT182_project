@@ -19,7 +19,14 @@ class mydb:
     # lay du lieu cua ban sach
     def handleLoadSach(self):
         cursor = self.mydb.cursor()
-        sql= "select sach.masach,sach.tensach,nxb.tennxb,tacgia.tentacgia,theloai.tenloai,sach.mota,sach.masach from sach join tacgia on tacgia.matacgia=sach.matacgia join nxb on nxb.manxb=sach.manxb join theloai on theloai.maloai=sach.maloai order by masach"
+        sql = """
+                        SELECT sach.masach, sach.tensach, nxb.tennxb, tacgia.tentacgia, theloai.tenloai, sach.mota, sach.masach
+                        FROM sach
+                            JOIN tacgia ON tacgia.matacgia = sach.matacgia
+                            JOIN nxb ON nxb.manxb = sach.manxb
+                            JOIN theloai ON theloai.maloai = sach.maloai
+                        ORDER BY masach
+                """
         cursor.execute(sql)
         results =cursor.fetchall()
         return results
@@ -27,7 +34,25 @@ class mydb:
     #xu ly xoa sach
     #xu ly cap nhat sach
     #xu ly tim sach
-
+    def handleTimSach(self, tacgia, nxb, theloai):
+        cursor = self.mydb.cursor()
+        sql = """
+                SELECT sach.masach, sach.tensach, nxb.tennxb, tacgia.tentacgia, theloai.tenloai, sach.mota, sach.masach
+                FROM sach
+                    JOIN tacgia ON tacgia.matacgia = sach.matacgia
+                    JOIN nxb ON nxb.manxb = sach.manxb
+                    JOIN theloai ON theloai.maloai = sach.maloai
+                WHERE tacgia.tentacgia LIKE %s
+                    AND nxb.tennxb LIKE %s
+                    AND theloai.tenloai LIKE %s
+                ORDER BY masach
+            """
+        val = (f'%{tacgia}%', f'%{nxb}%', f'%{theloai}%')
+        print(tacgia, nxb, theloai)
+        cursor.execute(sql, val)
+        results =cursor.fetchall()
+        print(results)
+        return results
     #lay du lieu cua ban NXB
     def handleLoadNXB(self):
         cursor = self.mydb.cursor()
