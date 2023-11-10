@@ -15,7 +15,38 @@ class ql_tp_sach(QWidget):
         self.ui.tableWidget_nxb.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
         self.ui.tableWidget_TacGia.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
         self.ui.tableWidget_theLoai.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
+        self.handleLoadNXB_table()
+        self.handleLoadTacGia_table()
+        self.handleLoadTheLoai_table()
         
+    def handleLoadTacGia_table(self):
+        db= mydb()
+        tacgia=db.handleLoadTacGia()
+        self.ui.tableWidget_TacGia.setRowCount(len(tacgia))
+        tablerow=0
+        for tacgia in tacgia:
+            self.ui.tableWidget_TacGia.setItem(tablerow, 0, QTableWidgetItem(str(tacgia[0])))
+            self.ui.tableWidget_TacGia.setItem(tablerow, 1, QTableWidgetItem(str(tacgia[1])))
+            tablerow += 1
+    def handleLoadNXB_table(self):
+        db= mydb()
+        nxb=db.handleLoadNXB()
+        self.ui.tableWidget_nxb.setRowCount(len(nxb))
+        tablerow=0
+        for nxb in nxb:
+            self.ui.tableWidget_nxb.setItem(tablerow, 0, QTableWidgetItem(str(nxb[0])))
+            self.ui.tableWidget_nxb.setItem(tablerow, 1, QTableWidgetItem(str(nxb[1])))
+            tablerow += 1
+            
+    def handleLoadTheLoai_table(self):
+        db= mydb()
+        tl=db.handleLoadTheLoai()
+        self.ui.tableWidget_theLoai.setRowCount(len(tl))
+        tablerow=0
+        for tl in tl:
+            self.ui.tableWidget_theLoai.setItem(tablerow, 0, QTableWidgetItem(str(tl[0])))
+            self.ui.tableWidget_theLoai.setItem(tablerow, 1, QTableWidgetItem(str(tl[1])))
+            tablerow += 1
 
 class qlsach(QWidget):
     def __init__ (self):
@@ -43,6 +74,7 @@ class qlsach(QWidget):
         tl=db.handleLoadTheLoai()
         for tl in tl:
             self.ui.comboBox_3.addItem(str(tl[1]))
+            
     def handleLoadSach(self):
         
         db=mydb()
