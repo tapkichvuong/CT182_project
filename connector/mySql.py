@@ -142,6 +142,31 @@ class mydb:
         finally:
             self.mydb.close()
             
+    def getCurrentPassword(self, madocgia):
+        try:
+            cursor = self.mydb.cursor()
+            sql = """SELECT taikhoan.pass 
+                        FROM docgia JOIN taikhoan ON docgia.username = taikhoan.username
+                        WHERE docgia.madocgia = %s
+                    """
+            val = (madocgia,)
+            cursor.execute(sql, val)
+            password = cursor.fetchone()
+            return password[0]
+        except Error as e:
+            print(e)
+
+    def changePassword(self, madocgia, password):
+        try:
+            hash_pass = sha256(password.encode('utf-8')).hexdigest()
+            cursor = self.mydb.cursor()
+            procName = "ChangePassword"
+            val = (madocgia, hash_pass)
+            cursor.callproc(procName, val)
+            results = cursor.fetchall()
+        except Error as e:
+            print(e)
+        
     def generate_random_string(self):
         characters = string.ascii_letters + string.digits  # Use uppercase letters and digits
         random_string = ''.join(random.choice(characters) for _ in range(8))

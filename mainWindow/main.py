@@ -1,6 +1,7 @@
 import sys
-from PyQt5.QtWidgets import QMainWindow, QApplication, QPushButton, QWidget, QTableWidgetItem, QHeaderView
+from PyQt5.QtWidgets import QMainWindow, QApplication, QPushButton, QWidget, QTableWidgetItem, QHeaderView, QMessageBox
 from PyQt5.QtCore import pyqtSlot, QFile, QTextStream
+from hashlib import sha256
 
 from mainwindow.Ui_sidebar import Ui_MainWindow
 from mainwindow.Ui_qlsach import Ui_Form
@@ -9,10 +10,32 @@ from mainwindow.Ui_change_password import Ui_change_pass_page
 from connector.mySql import mydb
 
 class change_password(QWidget):
-     def __init__ (self):
+    def __init__ (self, logged_in_user):
         super(change_password,self). __init__()
         self.ui = Ui_change_pass_page()
         self.ui.setupUi(self)
+        self.madocgia = logged_in_user
+        self.ui.changePass_Btn.clicked.connect(self.changePassword)
+        
+    def changePassword(self):
+        db = mydb()
+        msg = QMessageBox()
+        currentPass = db.getCurrentPassword(self.madocgia)
+        oldPass = self.ui.lineEdit_oldPass.text().strip()
+        newPass = self.ui.lineEdit_newPass.text().strip()
+        confirmPass = self.ui.lineEdit_confirmPass.text().strip()
+        oldPass = sha256(oldPass.encode('utf-8')).hexdigest()
+        if oldPass != currentPass:
+            msg.setIcon(QMessageBox.Warning)
+            msg.warning(self, 'Error', 'Wrong password')
+            return
+        if newPass != confirmPass:
+            msg.setIcon(QMessageBox.Warning)
+            msg.warning(self, 'Error', 'Password and confirm password are not the same')
+            return
+        db.changePassword(self.madocgia, newPass)
+        msg.setIcon(QMessageBox.Information)
+        msg.information(self,'Success', 'Password have been changed')
 
 class ql_tp_sach(QWidget):
     def __init__ (self):
@@ -130,10 +153,10 @@ class qlsach(QWidget):
     
 
 class MainWindow(QMainWindow):
-    def __init__(self):
+    def __init__(self, login_instance):
         super(MainWindow, self).__init__()
         #get login user
-        self.logged_in_user = None
+        self.logged_in_user = login_instance
         #create GUI
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
@@ -142,16 +165,16 @@ class MainWindow(QMainWindow):
         self.ui.gridLayout_4.addWidget(self.qlsach,0,0,1,1)
         self.ql_tp = ql_tp_sach()
         self.ui.gridLayout_9.addWidget(self.ql_tp, 0,0,1,1)
-        self.change_pass_page = change_password()
+        self.change_pass_page = change_password(self.logged_in_user)
         self.ui.gridLayout_8.addWidget(self.change_pass_page, 0,0,1,1)
         self.ui.icon_only_widget.hide()
         self.ui.stackedWidget.setCurrentIndex(0)
         self.ui.home_btn_2.setChecked(True)
-
+        self.login()
+        
     ## lay ma doc gia
-    def login(self, login_instance):
-        if login_instance:
-            self.logged_in_user = login_instance
+    def login(self):
+        if self.logged_in_user:
             print(f"Logged in as {self.logged_in_user}")
         else:
             print("Authentication failed.")
