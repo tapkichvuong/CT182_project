@@ -21,9 +21,8 @@ app.setStyleSheet(style_stream.readAll())
 while True:
     loginWindow = LoginForm()
     if loginWindow.exec_() == QDialog.Accepted:
-        win = MainWindow()
         # truyen ma doc gia vao main
-        win.login(loginWindow.madocgia)
+        win = MainWindow(loginWindow.madocgia)
         win.show()
         app.exec_()
     
