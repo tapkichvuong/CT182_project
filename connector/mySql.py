@@ -75,7 +75,6 @@ class mydb:
         print(masach, tensach, tacgia, nxb, theloai)
         cursor.execute(sql, val)
         results =cursor.fetchall()
-        print(results)
         return results
     #lay du lieu cua ban NXB
     def handleLoadNXB(self):
@@ -86,10 +85,63 @@ class mydb:
         return nxb
       
     #xu ly them nxb
+    def handleThemNXB(self,tennxb):
+        try:
+            cursor = self.mydb.cursor()
+            sql = "INSERT INTO nxb(tennxb) VALUES (%s)"
+            val = (tennxb,)
+            cursor.execute(sql, val)
+            # print(cursor)
+            cursor.close()
+            self.mydb.commit()
+            return True
+        except Error  as e:
+            if "1062" in str(e):
+                print("Error: Duplicate entry detected!")
+                return False
+            else:
+                print("Error:", e)
+                return False
+        finally:
+            self.mydb.close()
     #xu ly xoa nxb
+    def handleXoaNXB(self, manxb, tennxb):
+        if not manxb and not tennxb:
+            return False
+        if not manxb:
+            sql = "DELETE FROM nxb WHERE tennxb = %s"
+            val = (tennxb,)
+        elif not tennxb:
+            sql = "DELETE FROM nxb WHERE manxb = %s"
+            val = (manxb,)
+        else: 
+            sql = "DELETE FROM nxb WHERE manxb = %s AND tennxb = %s"
+            val = (manxb,tennxb)
+        try:
+            cursor = self.mydb.cursor()
+            cursor.execute(sql, val)
+            # print(cursor)
+            cursor.close()
+            self.mydb.commit()
+            return True
+        except Error  as e:
+            print(e)
+            return False
     #xu ly cap nhat nxb
-    #xu ly tim xnb
-
+    
+    #xu ly tim nxb
+    def handleTimNxb(self, manxb, tennxb):
+        cursor = self.mydb.cursor()
+        sql = """
+                SELECT *
+                FROM nxb
+                WHERE  manxb LIKE %s AND tennxb LIKE %s
+                ORDER BY manxb
+            """
+        val = (f'{manxb}%', f'{tennxb}%')
+        cursor.execute(sql, val)
+        results =cursor.fetchall()
+        return results
     #lay du lieu cua ban Tac Gia
     def handleLoadTacGia(self):
         cursor = self.mydb.cursor()
@@ -97,11 +149,66 @@ class mydb:
         cursor.execute(sql)
         results =cursor.fetchall()
         return results  
+    
     #xu ly them tac gia
+    def handleThemTacGia(self,tentacgia):
+        try:
+            cursor = self.mydb.cursor()
+            sql = "INSERT INTO tacgia(tentacgia) VALUES (%s)"
+            val = (tentacgia,)
+            cursor.execute(sql, val)
+            # print(cursor)
+            cursor.close()
+            self.mydb.commit()
+            return True
+        except Error  as e:
+            if "1062" in str(e):
+                print("Error: Duplicate entry detected!")
+                return False
+            else:
+                print("Error:", e)
+                return False
+        finally:
+            self.mydb.close()
+    
     #xu ly xoa tac gia
+    def handleXoaTacGia(self, matacgia, tentacgia):
+        if not matacgia and not tentacgia:
+            return False
+        if not matacgia:
+            sql = "DELETE FROM tacgia WHERE tentacgia = %s"
+            val = (tentacgia,)
+        elif not tentacgia:
+            sql = "DELETE FROM tacgia WHERE matacgia = %s"
+            val = (matacgia,)
+        else: 
+            sql = "DELETE FROM tacgia WHERE matacgia = %s AND tentacgia = %s"
+            val = (matacgia,tentacgia)
+        try:
+            cursor = self.mydb.cursor()
+            cursor.execute(sql, val)
+            # print(cursor)
+            cursor.close()
+            self.mydb.commit()
+            return True
+        except Error  as e:
+            print(e)
+            return False
+        
     #xu ly cap nhat tac gia
     #xu ly tim tac gia
-
+    def handleTimTacGia(self, matacgia, tentacgia):
+        cursor = self.mydb.cursor()
+        sql = """
+                SELECT *
+                FROM tacgia
+                WHERE  matacgia LIKE %s AND tentacgia LIKE %s
+                ORDER BY matacgia
+            """
+        val = (f'{matacgia}%', f'{tentacgia}%')
+        cursor.execute(sql, val)
+        results =cursor.fetchall()
+        return results
     #lay du lieu cua ban The Loai
     def handleLoadTheLoai(self):
         cursor = self.mydb.cursor()
@@ -111,10 +218,63 @@ class mydb:
 
         return theloai
     #xu ly them the loai
+    def handleThemTheLoai(self,tenloai):
+        try:
+            cursor = self.mydb.cursor()
+            sql = "INSERT INTO theloai(tenloai) VALUES (%s)"
+            val = (tenloai,)
+            cursor.execute(sql, val)
+            # print(cursor)
+            cursor.close()
+            self.mydb.commit()
+            return True
+        except Error  as e:
+            if "1062" in str(e):
+                print("Error: Duplicate entry detected!")
+                return False
+            else:
+                print("Error:", e)
+                return False
+        finally:
+            self.mydb.close()
+    
     #xu ly xoa the loai
+    def handleXoaTheLoai(self, maloai, tenloai):
+        if not maloai and not tenloai:
+            return False
+        if not maloai:
+            sql = "DELETE FROM theloai WHERE tenloai = %s"
+            val = (tenloai,)
+        elif not tenloai:
+            sql = "DELETE FROM theloai WHERE maloai = %s"
+            val = (maloai,)
+        else: 
+            sql = "DELETE FROM theloai WHERE maloai = %s AND tenloai = %s"
+            val = (maloai,tenloai)
+        try:
+            cursor = self.mydb.cursor()
+            cursor.execute(sql, val)
+            # print(cursor)
+            cursor.close()
+            self.mydb.commit()
+            return True
+        except Error  as e:
+            print(e)
+            return False
     #xu ly cap nhat loai
     #xu ly tim the loai
-
+    def handleTimTheLoai(self, maloai, tenloai):
+        cursor = self.mydb.cursor()
+        sql = """
+                SELECT *
+                FROM theloai
+                WHERE  maloai LIKE %s AND tenloai LIKE %s
+                ORDER BY maloai
+            """
+        val = (f'{maloai}%', f'{tenloai}%')
+        cursor.execute(sql, val)
+        results =cursor.fetchall()
+        return results
     # xu li dang ky
     def handleRegister(self, account):
         try:

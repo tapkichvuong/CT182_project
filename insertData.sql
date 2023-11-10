@@ -141,7 +141,7 @@ VALUES
 (8, 'NXB Tài chính'),
 (9, 'NXB Hội Nhà văn');
 
-insert into sach values
+insert into sach (tensach,matacgia,manxb,maloai,mota) values
 ('Người tình', 1, 6, 1, 'Câu chuyện tình yêu giữa một cô gái trẻ Việt Nam và một chàng trai Pháp trong bối cảnh chiến tranh Việt Nam.'),
 ('Cánh đồng bất tận', 2, 5, 1, 'Câu chuyện về cuộc sống của những người dân nghèo ở miền Tây sông nước.'),
 ('Điều giản dị', 5, 4, 1, 'Câu chuyện về tình cảm gia đình và những bài học cuộc sống.'),

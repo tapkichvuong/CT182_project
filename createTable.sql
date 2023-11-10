@@ -30,17 +30,17 @@ create table docgia(
 );
 
 create table theloai(
-	maloai int primary key,
+	maloai int primary key AUTO_INCREMENT,
     tenloai varchar(20)
 );
 
 create table nxb(
-	manxb int primary key,
+	manxb int primary key AUTO_INCREMENT,
     tennxb varchar(30)
 );
 
 create table tacgia(
-	matacgia int primary key,
+	matacgia int primary key AUTO_INCREMENT,
     tentacgia varchar(30)
 );
 
