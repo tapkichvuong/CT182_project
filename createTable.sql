@@ -45,7 +45,7 @@ create table tacgia(
 );
 
 create table sach(
-	masach int primary key,
+	masach int primary key AUTO_INCREMENT,
     tensach varchar(50),
     matacgia int,
     manxb int,

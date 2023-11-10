@@ -142,6 +142,7 @@ class mydb:
         finally:
             self.mydb.close()
             
+    # lay mat khau hien tai        
     def getCurrentPassword(self, madocgia):
         try:
             cursor = self.mydb.cursor()
@@ -156,6 +157,7 @@ class mydb:
         except Error as e:
             print(e)
 
+    #lay thay doi mat khau
     def changePassword(self, madocgia, password):
         try:
             hash_pass = sha256(password.encode('utf-8')).hexdigest()
