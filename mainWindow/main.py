@@ -56,7 +56,7 @@ class ql_tp_sach(QWidget):
             tablerow += 1
 
 class qlsach(QWidget):
-    def __init__ (self):
+    def __init__ (self, main_window_instance):
         super(qlsach,self). __init__()
         self.ui = Ui_Form()
         self.ui.setupUi(self)
@@ -65,6 +65,8 @@ class qlsach(QWidget):
         self.handleLoadTacGia_CBB()
         self.handleLoadNXB_CBB()
         self.handleLoadTheLoai_CBB()
+        self.main_window_instance = main_window_instance
+        self.ui.pushButton_5.clicked.connect(self.redirect_to_ql_tp)
 
     def handleLoadTacGia_CBB(self):
         db= mydb()
@@ -83,7 +85,6 @@ class qlsach(QWidget):
             self.ui.comboBox_3.addItem(str(tl[1]))
             
     def handleLoadSach(self):
-        
         db=mydb()
         data = db.handleLoadSach()
         self.ui.tableWidget.setRowCount(len(data))
@@ -98,10 +99,12 @@ class qlsach(QWidget):
             tablerow+=1
     
     def redirect_to_ql_tp(self):
-        QWidget.setVisible(self, False)
-        self.tp = ql_tp_sach()
-        self.tp.exec_()
-        self.show()          
+        # Change the stackedWidget index in MainWindow to 7
+        self.main_window_instance.ui.orders_btn_1.setChecked(False)
+        self.main_window_instance.ui.orders_btn_2.setChecked(False)
+        self.main_window_instance.ui.pushButton.setChecked(True)
+        self.main_window_instance.ui.pushButton_2.setChecked(True)
+        self.main_window_instance.ui.stackedWidget.setCurrentIndex(7)         
     
 
 class MainWindow(QMainWindow):
@@ -113,7 +116,7 @@ class MainWindow(QMainWindow):
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
 
-        self.qlsach =qlsach()
+        self.qlsach =qlsach(self)
         self.ui.gridLayout_4.addWidget(self.qlsach,0,0,1,1)
         self.ql_tp = ql_tp_sach()
         self.ui.gridLayout_9.addWidget(self.ql_tp, 0,0,1,1)
