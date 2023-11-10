@@ -5,7 +5,14 @@ from PyQt5.QtCore import pyqtSlot, QFile, QTextStream
 from mainwindow.Ui_sidebar import Ui_MainWindow
 from mainwindow.Ui_qlsach import Ui_Form
 from mainwindow.Ui_ql_tp_sach import Ui_ql_tp_sach
+from mainwindow.Ui_change_password import Ui_change_pass_page
 from connector.mySql import mydb
+
+class change_password(QWidget):
+     def __init__ (self):
+        super(change_password,self). __init__()
+        self.ui = Ui_change_pass_page()
+        self.ui.setupUi(self)
 
 class ql_tp_sach(QWidget):
     def __init__ (self):
@@ -110,6 +117,8 @@ class MainWindow(QMainWindow):
         self.ui.gridLayout_4.addWidget(self.qlsach,0,0,1,1)
         self.ql_tp = ql_tp_sach()
         self.ui.gridLayout_9.addWidget(self.ql_tp, 0,0,1,1)
+        self.change_pass_page = change_password()
+        self.ui.gridLayout_8.addWidget(self.change_pass_page, 0,0,1,1)
         self.ui.icon_only_widget.hide()
         self.ui.stackedWidget.setCurrentIndex(0)
         self.ui.home_btn_2.setChecked(True)

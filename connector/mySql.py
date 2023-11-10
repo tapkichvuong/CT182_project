@@ -72,7 +72,6 @@ class mydb:
             sql = "INSERT INTO taikhoan (username, pass) VALUES (%s, %s)"
             #Bam mat khau 
             hash_pass = sha256(account['pass'].encode('utf-8')).hexdigest()
-            print(hash_pass)
             val = (account['username'], hash_pass)
             cursor.execute(sql, val)
             madocgia = self.generate_random_string()
@@ -100,7 +99,6 @@ class mydb:
         val = (username,)
         cursor.execute(sql, val)
         myresult = cursor.fetchone()
-        print(myresult)
         #Bam mat khau 
         hash_pass = sha256(password.encode('utf-8')).hexdigest()
         return (hash_pass == myresult[0])
@@ -113,7 +111,6 @@ class mydb:
             val = (username,)
             cursor.execute(sql, val)
             madocgia = cursor.fetchone()
-            print(madocgia)
             return madocgia[0]
         except Error as e:
             print(e)
