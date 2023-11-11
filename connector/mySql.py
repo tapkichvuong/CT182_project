@@ -358,7 +358,6 @@ class mydb:
         val = (username,)
         cursor.execute(sql, val)
         myresult = cursor.fetchone()
-        print(myresult)
         #Bam mat khau 
         hash_pass = sha256(password.encode('utf-8')).hexdigest()
         return (hash_pass == myresult[0])
@@ -401,9 +400,70 @@ class mydb:
             val = (madocgia, hash_pass)
             cursor.callproc(procName, val)
             results = cursor.fetchall()
+            self.mydb.commit()
         except Error as e:
             print(e)
+    
+    #load du lieu huyen
+    def handleLoadHuyen(self):
+        cursor = self.mydb.cursor()
+        sql = """
+                SELECT *
+                FROM huyen;
+            """
+        cursor.execute(sql)
+        results =cursor.fetchall()
+        return results
+    
+    #load du lieu phuong
+    def handleLoadPhuong(self, mahuyen):
+        cursor = self.mydb.cursor()
+        sql = """
+                SELECT *
+                FROM phuong
+                WHERE mahuyen = %s;
+            """
+        val = (mahuyen, )
+        cursor.execute(sql, val)
+        results =cursor.fetchall()
+        return results
+    
+    #load profile data
+    def handleLoadProfile(self, madocgia):
+        cursor = self.mydb.cursor()
+        sql = """
+                        SELECT dg.firstname, dg.lastname, dg.gender, DAY(dg.birth), MONTH(dg.birth), YEAR(dg.birth), dg.phone, dg.email, h.tenhuyen, p.tenphuong, dg.diachi
+                        FROM docgia dg
+                            LEFT JOIN phuong p ON dg.maphuong = p.maphuong
+                            LEFT JOIN huyen h ON p.mahuyen = h.mahuyen
+                        WHERE dg.madocgia LIKE %s;
+                """
+        val = (madocgia,)
+        cursor.execute(sql, val)
+        results =cursor.fetchone()
+        return results
+    
+    def handleEditProfile(self, madocgia, profile):
+        try:
+            cursor = self.mydb.cursor()
+            sql = "CALL UpdateDocGia (%s, %s, %s, %s, %s, %s, %s, %s, %s)"
+            val = (madocgia, 
+                   profile['firstname'], 
+                   profile['lastname'], 
+                   profile['gender'],
+                   profile['birthday'],
+                   profile['phone'], 
+                   profile['email'], 
+                   profile['tenphuong'], 
+                   profile['diachi'])
+            cursor.execute(sql, val)
+            self.mydb.commit()
+            return True
+        except Error as e:
+            print(e)
+            return False
         
+
     def generate_random_string(self):
         characters = string.ascii_letters + string.digits  # Use uppercase letters and digits
         random_string = ''.join(random.choice(characters) for _ in range(8))

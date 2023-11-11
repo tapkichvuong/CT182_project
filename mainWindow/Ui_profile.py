@@ -274,19 +274,6 @@ class Ui_Profile(object):
         self.gridLayout.addLayout(self.gridLayout_8, 26, 1, 1, 1)
         self.gridLayout_4 = QtWidgets.QGridLayout()
         self.gridLayout_4.setObjectName("gridLayout_4")
-        self.lineEdit_gender = QtWidgets.QLineEdit(Profile)
-        font = QtGui.QFont()
-        font.setPointSize(12)
-        font.setBold(False)
-        font.setWeight(50)
-        self.lineEdit_gender.setFont(font)
-        self.lineEdit_gender.setStyleSheet("background-color: rgb(255, 246, 247);\n"
-"border: 1px solid rgb(116, 30, 240);\n"
-"border-radius: 5px;\n"
-"padding: 2px;\n"
-"")
-        self.lineEdit_gender.setObjectName("lineEdit_gender")
-        self.gridLayout_4.addWidget(self.lineEdit_gender, 2, 1, 1, 1)
         self.label = QtWidgets.QLabel(Profile)
         self.label.setMinimumSize(QtCore.QSize(48, 48))
         self.label.setMaximumSize(QtCore.QSize(48, 48))
@@ -302,6 +289,20 @@ class Ui_Profile(object):
         self.label_gender.setFont(font)
         self.label_gender.setObjectName("label_gender")
         self.gridLayout_4.addWidget(self.label_gender, 1, 1, 1, 1)
+        self.comboBox = QtWidgets.QComboBox(Profile)
+        font = QtGui.QFont()
+        font.setPointSize(12)
+        self.comboBox.setFont(font)
+        self.comboBox.setStyleSheet("background-color: rgb(255, 246, 247);\n"
+"border: 1px solid rgb(116, 30, 240);\n"
+"border-radius: 5px;\n"
+"padding: 2px;\n"
+"")
+        self.comboBox.setObjectName("comboBox")
+        self.comboBox.addItem("")
+        self.comboBox.addItem("")
+        self.comboBox.addItem("")
+        self.gridLayout_4.addWidget(self.comboBox, 2, 1, 1, 1)
         self.gridLayout.addLayout(self.gridLayout_4, 7, 1, 1, 1)
         spacerItem5 = QtWidgets.QSpacerItem(20, 5, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed)
         self.gridLayout.addItem(spacerItem5, 18, 1, 1, 1)
@@ -330,4 +331,7 @@ class Ui_Profile(object):
         self.label_district.setText(_translate("Profile", "Quận/Huyện"))
         self.label_street.setText(_translate("Profile", "Đường"))
         self.label_gender.setText(_translate("Profile", "Giới tính"))
+        self.comboBox.setItemText(0, _translate("Profile", "Nam"))
+        self.comboBox.setItemText(1, _translate("Profile", "Nữ"))
+        self.comboBox.setItemText(2, _translate("Profile", "Khác"))
 from mainwindow import profile_rsc_rc

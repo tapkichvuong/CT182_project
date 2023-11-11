@@ -510,24 +510,6 @@ padding: 2px;
    </item>
    <item row="7" column="1">
     <layout class="QGridLayout" name="gridLayout_4">
-     <item row="2" column="1">
-      <widget class="QLineEdit" name="lineEdit_gender">
-       <property name="font">
-        <font>
-         <pointsize>12</pointsize>
-         <weight>50</weight>
-         <bold>false</bold>
-        </font>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">background-color: rgb(255, 246, 247);
-border: 1px solid rgb(116, 30, 240);
-border-radius: 5px;
-padding: 2px;
-</string>
-       </property>
-      </widget>
-     </item>
      <item row="1" column="0" rowspan="2">
       <widget class="QLabel" name="label">
        <property name="minimumSize">
@@ -562,6 +544,37 @@ padding: 2px;
        <property name="text">
         <string>Giới tính</string>
        </property>
+      </widget>
+     </item>
+     <item row="2" column="1">
+      <widget class="QComboBox" name="comboBox">
+       <property name="font">
+        <font>
+         <pointsize>12</pointsize>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">background-color: rgb(255, 246, 247);
+border: 1px solid rgb(116, 30, 240);
+border-radius: 5px;
+padding: 2px;
+</string>
+       </property>
+       <item>
+        <property name="text">
+         <string>Nam</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Nữ</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Khác</string>
+        </property>
+       </item>
       </widget>
      </item>
     </layout>
