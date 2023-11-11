@@ -128,7 +128,23 @@ class mydb:
             print(e)
             return False
     #xu ly cap nhat nxb
-    
+    def handleSuaNXB(self, manxb, tennxb):
+        if not manxb or not tennxb:
+            return False
+        else: 
+            sql = "UPDATE nxb SET tennxb = %s WHERE manxb = %s"
+            val = (tennxb, manxb)
+        try:
+            cursor = self.mydb.cursor()
+            cursor.execute(sql, val)
+            # print(cursor)
+            cursor.close()
+            self.mydb.commit()
+            return True
+        except Error  as e:
+            print(e)
+            return False
+        
     #xu ly tim nxb
     def handleTimNxb(self, manxb, tennxb):
         cursor = self.mydb.cursor()
@@ -196,6 +212,23 @@ class mydb:
             return False
         
     #xu ly cap nhat tac gia
+    def handleSuaTacGia(self, matacgia, tentacgia):
+        if not matacgia or not tentacgia:
+            return False
+        else: 
+            sql = "UPDATE tacgia SET tentacgia = %s WHERE matacgia = %s"
+            val = (tentacgia, matacgia)
+        try:
+            cursor = self.mydb.cursor()
+            cursor.execute(sql, val)
+            # print(cursor)
+            cursor.close()
+            self.mydb.commit()
+            return True
+        except Error  as e:
+            print(e)
+            return False
+        
     #xu ly tim tac gia
     def handleTimTacGia(self, matacgia, tentacgia):
         cursor = self.mydb.cursor()
@@ -262,6 +295,22 @@ class mydb:
             print(e)
             return False
     #xu ly cap nhat loai
+    def handleSuaTheLoai(self, maloai, tenloai):
+        if not maloai or not tenloai:
+            return False
+        else: 
+            sql = "UPDATE tacgia SET tenloai = %s WHERE maloai = %s"
+            val = (tenloai, maloai)
+        try:
+            cursor = self.mydb.cursor()
+            cursor.execute(sql, val)
+            # print(cursor)
+            cursor.close()
+            self.mydb.commit()
+            return True
+        except Error  as e:
+            print(e)
+            return False
     #xu ly tim the loai
     def handleTimTheLoai(self, maloai, tenloai):
         cursor = self.mydb.cursor()

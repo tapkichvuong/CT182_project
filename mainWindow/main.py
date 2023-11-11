@@ -135,21 +135,45 @@ class ql_tp_sach(QWidget):
         
     def handleEditNXB(self):
         db=mydb()
+        msg = QMessageBox()
         manxb = self.ui.lineEdit_manxb.text().strip()
         tennxb = self.ui.lineEdit_tennxb.text().strip()
-        data = db.handleTimNxb(manxb, tennxb)
+        check = db.handleSuaNXB(manxb, tennxb)
+        self.handleLoadNXB_table()
+        if check:
+            msg.setIcon(QMessageBox.Information)
+            msg.information(self,'Success', 'Sửa nhà xuất bản thành công')
+        else:
+            msg.setIcon(QMessageBox.Critical)
+            msg.information(self,'Failed', 'Sửa nhà xuất bản thất bại')
         
     def handleEditTacGia(self):
         db=mydb()
+        msg = QMessageBox()
         maTacGia = self.ui.lineEdit_maTacGia.text().strip()
         tenTacGia = self.ui.lineEdit_tenTacGia.text().strip()
-        data = db.handleTimTacGia(maTacGia, tenTacGia)
+        check = db.handleTimTacGia(maTacGia, tenTacGia)
+        self.handleLoadTacGia_table()
+        if check:
+            msg.setIcon(QMessageBox.Information)
+            msg.information(self,'Success', 'Sửa tác giả thành công')
+        else:
+            msg.setIcon(QMessageBox.Critical)
+            msg.information(self,'Failed', 'Sửa tác giả thất bại')
         
     def handleEditTheLoai(self):
         db=mydb()
+        msg = QMessageBox()
         maTheLoai = self.ui.lineEdit_maTheLoai.text().strip()
         tenTheLoai = self.ui.lineEdit_tenTheLoai.text().strip()
-        data = db.handleTimTheLoai(maTheLoai, tenTheLoai)
+        check = db.handleTimTheLoai(maTheLoai, tenTheLoai)
+        self.handleLoadTheLoai_table()
+        if check:
+            msg.setIcon(QMessageBox.Information)
+            msg.information(self,'Success', 'Sửa thể loại thành công')
+        else:
+            msg.setIcon(QMessageBox.Critical)
+            msg.information(self,'Failed', 'Sửa thể loại thất bại')
         
     def handleDeleteNXB(self):
         db=mydb()
