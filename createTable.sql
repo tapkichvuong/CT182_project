@@ -26,11 +26,9 @@ create table docgia(
     email varchar(30),
 	username varchar(25),
     maphuong int,
-    mahuyen int,
     diachi varchar(50),
     CONSTRAINT FK_dgtk FOREIGN KEY (username) REFERENCES taikhoan(username),
-    CONSTRAINT FK_dgphuong FOREIGN KEY (maphuong) REFERENCES phuong(maphuong),
-    CONSTRAINT FK_dghuyen FOREIGN KEY (mahuyen) REFERENCES huyen(mahuyen)
+    CONSTRAINT FK_dgphuong FOREIGN KEY (maphuong) REFERENCES phuong(maphuong)
 );
 
 create table theloai(
