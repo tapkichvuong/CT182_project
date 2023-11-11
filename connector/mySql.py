@@ -11,8 +11,8 @@ class mydb:
         self.mydb = mysql.connector.connect(
             host = "localhost",
             user = "root",
-            password = "Minhhuy2310@",
-            database = "librarydb"
+            password = "123456",
+            database = "qlthuvien"
         )
     # Printing the connection object 
 
@@ -37,7 +37,6 @@ class mydb:
             sql = "INSERT INTO sach (tensach, matacgia, manxb, maloai , mota) VALUES (%s, %s, %s, %s, %s)"
             val = (sach['tensach'], sach['matacgia'], sach['manxb'],sach['maloai'], sach['mota'])
             cursor.execute(sql, val)
-            print(val)
             # print(cursor)
             cursor.close()
             self.mydb.commit()
@@ -54,7 +53,40 @@ class mydb:
         finally:
             self.mydb.close() 
     #xu ly xoa sach
+    def handleXoaSach(self, masach):
+        if not masach:
+            return False
+        else:
+            sql = "DELETE FROM sach WHERE masach = %s"
+            val = (masach,)
+        try:
+            cursor = self.mydb.cursor()
+            cursor.execute(sql, val)
+            # print(cursor)
+            cursor.close()
+            self.mydb.commit()
+            return True
+        except Error  as e:
+            print(e)
+            return False
     #xu ly cap nhat sach
+    def handleUpdateSach(self,masach,tensach,matacgia,manxb,maloai,mota):
+        if not masach:
+            return False
+        else: 
+            sql = "UPDATE sach SET tensach = %s,matacgia = %s,manxb = %s,maloai = %s,mota = %s WHERE masach =%s"
+            val = (tensach,matacgia,manxb,maloai,mota,masach)
+        try:
+            cursor = self.mydb.cursor()
+            cursor.execute(sql, val)
+            # print(cursor)
+            cursor.close()
+            self.mydb.commit()
+            return True
+        except Error  as e:
+            print(e)
+            return False
+        
     #xu ly tim sach
     def handleTimSach(self, masach, tensach, tacgia, nxb, theloai):
         cursor = self.mydb.cursor()
