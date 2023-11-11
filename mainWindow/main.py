@@ -268,7 +268,8 @@ class qlsach(QWidget):
         self.ui.setupUi(self)
         self.ui.tableWidget.horizontalHeader().setSectionResizeMode(5, QHeaderView.ResizeToContents)
         self.ui.pushButton_them.clicked.connect(self.addnewbook)
-        self.ui.pushButton_them.clicked.connect(self.handleLoadSach)
+        self.ui.pushButton_2.clicked.connect(self.DeleteSach)
+        self.ui.pushButton_3.clicked.connect(self.UpdateSach)
         self.handleLoadSach()
         self.handleLoadTacGia_CBB()
         self.handleLoadNXB_CBB()
@@ -276,28 +277,72 @@ class qlsach(QWidget):
         self.main_window_instance = main_window_instance
         self.ui.pushButton_5.clicked.connect(self.redirect_to_ql_tp)
         self.ui.pushButton.clicked.connect(self.handleSearching)
+    def UpdateSach(self):
+        masach = self.ui.lineEdit_masach.text().strip()
+        tensach = self.ui.lineEdit_tensach.text().strip()
+        matacgia = self.ui.comboBox_1.currentIndex()
+        manxb = self.ui.comboBox_2.currentIndex()
+        maloai = self.ui.comboBox_3.currentIndex()
+        mota = self.ui.lineEdit_10.text().strip()
+        db=mydb()
+        msg = QMessageBox()
+        checked = db.handleUpdateSach(masach,tensach,matacgia,manxb,maloai,mota)
+        self.handleLoadSach()
+
+        if checked:
+            
+            msg.setIcon(QMessageBox.Information)
+            msg.information(self,'Success', 'sửa sách thành công')
+        else:
+            msg.setIcon(QMessageBox.Critical)
+            msg.information(self,'Failed', 'sửa sách thất bại')  
+          
+    def DeleteSach(self):
+        db=mydb()
+        msg = QMessageBox()
+        masach = self.ui.lineEdit_masach.text()
+        check = db.handleXoaSach(masach)
+        self.handleLoadSach()
+        if check:
+            msg.setIcon(QMessageBox.Information)
+            msg.information(self,'Success', 'Xóa sách thành công')
+        else:
+            msg.setIcon(QMessageBox.Critical)
+            msg.information(self,'Failed', 'Xóa sách thất bại')
+
     def addnewbook(self):
         tensach = self.ui.lineEdit_tensach.text()
         matacgia = self.ui.comboBox_1.currentIndex()
         manxb = self.ui.comboBox_2.currentIndex()
         matheloai = self.ui.comboBox_3.currentIndex()
         mota = self.ui.lineEdit_10.text()
-        
         #them sach
+
         sach = {}
         sach['tensach'] = tensach
         sach['matacgia'] = matacgia
         sach['manxb'] = manxb
         sach['maloai'] = matheloai
         sach['mota'] = mota
-        db = mydb()
+
+        db=mydb()
+        msg = QMessageBox()
         checked = db.handleThemSach(sach)
-        
-        
-        
-        
+        self.handleLoadSach()
+        self.ui.lineEdit_masach.setText('')
+        self.ui.lineEdit_tensach.setText('')
+        self.ui.lineEdit_10.setText('')
+        if checked:
+            
+            msg.setIcon(QMessageBox.Information)
+            msg.information(self,'Success', 'thêm sách thành công')
+            
+        else:
+            msg.setIcon(QMessageBox.Critical)
+            msg.information(self,'Failed', 'thêm sách thất bại')  
 
     def handleLoadTacGia_CBB(self):
+        
         db= mydb()
         tacgia=db.handleLoadTacGia()
         self.ui.comboBox_1.addItem('')
@@ -331,7 +376,7 @@ class qlsach(QWidget):
     #ham tim kiem sach
     def handleSearching(self):
         db=mydb()
-        masach = self.ui.lineEdit.text().strip()
+        masach = self.ui.lineEdit_masach.text().strip()
         tensach = self.ui.lineEdit_tensach.text().strip()
         tacgia = self.ui.comboBox_1.currentText()
         nxb = self.ui.comboBox_2.currentText()
@@ -340,13 +385,34 @@ class qlsach(QWidget):
         self.ui.tableWidget.setRowCount(len(data))
         tablerow=0
         for row in data:
-            self.ui.tableWidget.setItem(tablerow, 0, QTableWidgetItem(str(row[0])))
-            self.ui.tableWidget.setItem(tablerow, 1, QTableWidgetItem(row[1]))
-            self.ui.tableWidget.setItem(tablerow, 2, QTableWidgetItem(row[2]))
-            self.ui.tableWidget.setItem(tablerow, 3, QTableWidgetItem(row[3]))
-            self.ui.tableWidget.setItem(tablerow, 4, QTableWidgetItem(row[4]))
-            self.ui.tableWidget.setItem(tablerow, 5, QTableWidgetItem(row[5]))
-            tablerow+=1
+            if len(data)==1:
+                self.ui.lineEdit_masach.setText(str(row[0]))
+                self.ui.lineEdit_tensach.setText(row[1])
+                self.ui.comboBox_1.setCurrentText(str(row[3]))
+                self.ui.comboBox_2.setCurrentText(str(row[2]))
+                self.ui.comboBox_3.setCurrentText(str(row[4]))
+                self.ui.lineEdit_10.setText(row[5])
+
+                self.ui.tableWidget.setItem(tablerow, 0, QTableWidgetItem(str(row[0])))
+                self.ui.tableWidget.setItem(tablerow, 1, QTableWidgetItem(row[1]))
+                self.ui.tableWidget.setItem(tablerow, 2, QTableWidgetItem(row[2]))
+                self.ui.tableWidget.setItem(tablerow, 3, QTableWidgetItem(row[3]))
+                self.ui.tableWidget.setItem(tablerow, 4, QTableWidgetItem(row[4]))
+                self.ui.tableWidget.setItem(tablerow, 5, QTableWidgetItem(row[5]))
+            else:
+                self.ui.lineEdit_masach.setText('')
+                self.ui.lineEdit_tensach.setText('')
+                self.handleLoadTacGia_CBB()
+                self.handleLoadNXB_CBB()
+                self.handleLoadTheLoai_CBB()
+                self.ui.lineEdit_10.setText('')
+                self.ui.tableWidget.setItem(tablerow, 0, QTableWidgetItem(str(row[0])))
+                self.ui.tableWidget.setItem(tablerow, 1, QTableWidgetItem(row[1]))
+                self.ui.tableWidget.setItem(tablerow, 2, QTableWidgetItem(row[2]))
+                self.ui.tableWidget.setItem(tablerow, 3, QTableWidgetItem(row[3]))
+                self.ui.tableWidget.setItem(tablerow, 4, QTableWidgetItem(row[4]))
+                self.ui.tableWidget.setItem(tablerow, 5, QTableWidgetItem(row[5]))
+                tablerow+=1
         
     def redirect_to_ql_tp(self):
         # Change the stackedWidget index in MainWindow to 7
