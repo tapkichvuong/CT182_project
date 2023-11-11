@@ -7,7 +7,15 @@ from mainwindow.Ui_sidebar import Ui_MainWindow
 from mainwindow.Ui_qlsach import Ui_Form
 from mainwindow.Ui_ql_tp_sach import Ui_ql_tp_sach
 from mainwindow.Ui_change_password import Ui_change_pass_page
+from mainwindow.Ui_profile import Ui_Profile
 from connector.mySql import mydb
+
+class profile(QWidget):
+    def __init__ (self, logged_in_user):
+        super(profile,self). __init__()
+        self.ui = Ui_Profile()
+        self.ui.setupUi(self)
+        self.madocgia = logged_in_user
 
 class change_password(QWidget):
     def __init__ (self, logged_in_user):
@@ -360,10 +368,15 @@ class MainWindow(QMainWindow):
 
         self.qlsach =qlsach(self)
         self.ui.gridLayout_4.addWidget(self.qlsach,0,0,1,1)
+        
         self.ql_tp = ql_tp_sach()
         self.ui.gridLayout_9.addWidget(self.ql_tp, 0,0,1,1)
+        
         self.change_pass_page = change_password(self.logged_in_user)
         self.ui.gridLayout_8.addWidget(self.change_pass_page, 0,0,1,1)
+        
+        self.profile = profile(self.logged_in_user)
+        self.ui.gridLayout_6.addWidget(self.profile, 0,0,1,1)
         self.ui.icon_only_widget.hide()
         self.ui.stackedWidget.setCurrentIndex(0)
         self.ui.home_btn_2.setChecked(True)

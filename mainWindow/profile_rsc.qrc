@@ -1,0 +1,11 @@
+<RCC>
+  <qresource prefix="icon">
+    <file>../images/female.png</file>
+    <file>../images/male.png</file>
+    <file>../icon/apartment-48.ico</file>
+    <file>../icon/birthday-cake-48.ico</file>
+    <file>../icon/gender-48.ico</file>
+    <file>../icon/message-outline-48.ico</file>
+    <file>../icon/phone-68-48.ico</file>
+  </qresource>
+</RCC>

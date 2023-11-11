@@ -6,7 +6,9 @@ create table taikhoan(
 
 create table phuong(
 	maphuong int primary key,
-    tenphuong varchar(30)
+    tenphuong varchar(30),
+    mahuyen int,
+    CONSTRAINT FK_p_h FOREIGN KEY (mahuyen) REFERENCES huyen(mahuyen)
 );
 
 create table huyen(
@@ -19,11 +21,13 @@ create table docgia(
 	firstname varchar(20),
     lastname varchar(20),
     gender int,
+    birth date,
     phone varchar(10),
     email varchar(30),
 	username varchar(25),
     maphuong int,
     mahuyen int,
+    diachi varchar(50),
     CONSTRAINT FK_dgtk FOREIGN KEY (username) REFERENCES taikhoan(username),
     CONSTRAINT FK_dgphuong FOREIGN KEY (maphuong) REFERENCES phuong(maphuong),
     CONSTRAINT FK_dghuyen FOREIGN KEY (mahuyen) REFERENCES huyen(mahuyen)

@@ -358,6 +358,7 @@ class mydb:
         val = (username,)
         cursor.execute(sql, val)
         myresult = cursor.fetchone()
+        print(myresult)
         #Bam mat khau 
         hash_pass = sha256(password.encode('utf-8')).hexdigest()
         return (hash_pass == myresult[0])
