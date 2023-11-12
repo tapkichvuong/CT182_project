@@ -495,8 +495,22 @@ class mydb:
             print(e)
             return False
         
-
+    def loadCountLoai(self):
+        try:
+            cursor = self.mydb.cursor()
+            sql = """SELECT theloai.maloai, theloai.tenloai, COUNT(sach.masach) AS sach_count
+                        FROM theloai
+                        LEFT JOIN sach ON theloai.maloai = sach.maloai
+                        GROUP BY theloai.maloai, theloai.tenloai;
+                """
+            cursor.execute(sql)
+            results = cursor.fetchall()
+            return results
+        except Error as e:
+            print(e)
+            return False
+            
     def generate_random_string(self):
-        characters = string.ascii_letters + string.digits  # Use uppercase letters and digits
+        characters = string.digits  # Use uppercase letters and digits
         random_string = ''.join(random.choice(characters) for _ in range(8))
         return random_string
