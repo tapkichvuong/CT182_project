@@ -53,14 +53,14 @@ class profile(QWidget):
         self.ui.comboBox_district.currentIndexChanged.connect(self.updateComboPhuong)
         self.handleLoadProfile()
         self.ui.pushButton.clicked.connect(self.handleEditProfile)
-    
+#LOAD HUYEN    
     def handleLoadHuyen(self):
         db= mydb()
         districts = db.handleLoadHuyen()
         self.ui.comboBox_district.addItem('')
         for district in districts:
             self.ui.comboBox_district.addItem(str(district[1]),str(district[0]))
-               
+#UPDATE COMBO PHUONG              
     def updateComboPhuong(self, index):
         self.ui.comboBox_ward.clear()
         db= mydb()
@@ -68,7 +68,7 @@ class profile(QWidget):
         self.ui.comboBox_ward.addItem('')
         for ward in wards:
             self.ui.comboBox_ward.addItem(str(ward[1]),str(ward[0]))
-                 
+#LOAD PROFILE                 
     def handleLoadProfile(self):
         db = mydb()
         data = db.handleLoadProfile(self.madocgia)
@@ -96,7 +96,7 @@ class profile(QWidget):
         self.ui.lineEdit_street.setText(diachi)
         self.ui.comboBox_district.setCurrentText(huyen)
         self.ui.comboBox_ward.setCurrentText(phuong)
-    
+#EDIT PROFILE   
     def handleEditProfile(self):
         db= mydb()
         msg = QMessageBox()
@@ -153,7 +153,7 @@ class profile(QWidget):
         else:
             msg.setIcon(QMessageBox.Critical)
             msg.information(self,'Failed', 'Sửa profile thất bại')
-
+#VALID DATE
     def is_valid_date(self, date_string):
         try:
             # Attempt to parse the date string
@@ -170,7 +170,7 @@ class change_password(QWidget):
         self.ui.setupUi(self)
         self.madocgia = logged_in_user
         self.ui.changePass_Btn.clicked.connect(self.changePassword)
-        
+#CHANGE PASSWORD        
     def changePassword(self):
         db = mydb()
         msg = QMessageBox()
@@ -217,7 +217,7 @@ class ql_tp_sach(QWidget):
         self.ui.pushButton_timnxb.clicked.connect(self.handleSearchingNXB)
         self.ui.pushButton_timTacGia.clicked.connect(self.handleSearchingTacGia)
         self.ui.pushButton_theLoai.clicked.connect(self.handleSearchingTheLoai)
-       
+#LOAD TABLE TAC GIA      
     def handleLoadTacGia_table(self):
         db= mydb()
         tacgia=db.handleLoadTacGia()
@@ -227,7 +227,7 @@ class ql_tp_sach(QWidget):
             self.ui.tableWidget_TacGia.setItem(tablerow, 0, QTableWidgetItem(str(tacgia[0])))
             self.ui.tableWidget_TacGia.setItem(tablerow, 1, QTableWidgetItem(str(tacgia[1])))
             tablerow += 1
-
+#LOAD TABLE NXB
     def handleLoadNXB_table(self):
         db= mydb()
         nxb=db.handleLoadNXB()
@@ -237,7 +237,7 @@ class ql_tp_sach(QWidget):
             self.ui.tableWidget_nxb.setItem(tablerow, 0, QTableWidgetItem(str(nxb[0])))
             self.ui.tableWidget_nxb.setItem(tablerow, 1, QTableWidgetItem(str(nxb[1])))
             tablerow += 1
-            
+#LOAD TABLE THE LOAI           
     def handleLoadTheLoai_table(self):
         db= mydb()
         tl=db.handleLoadTheLoai()
@@ -247,7 +247,7 @@ class ql_tp_sach(QWidget):
             self.ui.tableWidget_theLoai.setItem(tablerow, 0, QTableWidgetItem(str(tl[0])))
             self.ui.tableWidget_theLoai.setItem(tablerow, 1, QTableWidgetItem(str(tl[1])))
             tablerow += 1
-    
+#ADD NXB    
     def handleAddNXB(self):
         db=mydb()
         msg = QMessageBox()
@@ -260,7 +260,7 @@ class ql_tp_sach(QWidget):
         else:
             msg.setIcon(QMessageBox.Critical)
             msg.information(self,'Failed', 'Thêm nhà xuất bản thất bại')
-        
+#ADD TACGIA        
     def handleAddTacGia(self):
         db=mydb()
         msg = QMessageBox()
@@ -273,7 +273,7 @@ class ql_tp_sach(QWidget):
         else:
             msg.setIcon(QMessageBox.Critical)
             msg.information(self,'Failed', 'Thêm tác giả thất bại')
-        
+#ADD THE LOAI       
     def handleAddTheLoai(self):
         db=mydb()
         msg = QMessageBox()
@@ -286,7 +286,7 @@ class ql_tp_sach(QWidget):
         else:
             msg.setIcon(QMessageBox.Critical)
             msg.information(self,'Failed', 'Thêm thể loại thất bại')
-        
+#EDIT NXB       
     def handleEditNXB(self):
         db=mydb()
         msg = QMessageBox()
@@ -300,13 +300,13 @@ class ql_tp_sach(QWidget):
         else:
             msg.setIcon(QMessageBox.Critical)
             msg.information(self,'Failed', 'Sửa nhà xuất bản thất bại')
-        
+#EDIT TAC GIA       
     def handleEditTacGia(self):
         db=mydb()
         msg = QMessageBox()
         maTacGia = self.ui.lineEdit_maTacGia.text().strip()
         tenTacGia = self.ui.lineEdit_tenTacGia.text().strip()
-        check = db.handleTimTacGia(maTacGia, tenTacGia)
+        check = db.handleSuaTacGia(maTacGia, tenTacGia)
         self.handleLoadTacGia_table()
         if check:
             msg.setIcon(QMessageBox.Information)
@@ -314,13 +314,13 @@ class ql_tp_sach(QWidget):
         else:
             msg.setIcon(QMessageBox.Critical)
             msg.information(self,'Failed', 'Sửa tác giả thất bại')
-        
+#EDIT THE LOAI        
     def handleEditTheLoai(self):
         db=mydb()
         msg = QMessageBox()
         maTheLoai = self.ui.lineEdit_maTheLoai.text().strip()
         tenTheLoai = self.ui.lineEdit_tenTheLoai.text().strip()
-        check = db.handleTimTheLoai(maTheLoai, tenTheLoai)
+        check = db.handleSuaTheLoai(maTheLoai, tenTheLoai)
         self.handleLoadTheLoai_table()
         if check:
             msg.setIcon(QMessageBox.Information)
@@ -328,7 +328,7 @@ class ql_tp_sach(QWidget):
         else:
             msg.setIcon(QMessageBox.Critical)
             msg.information(self,'Failed', 'Sửa thể loại thất bại')
-        
+#DELETE NXB        
     def handleDeleteNXB(self):
         db=mydb()
         msg = QMessageBox()
@@ -342,7 +342,7 @@ class ql_tp_sach(QWidget):
         else:
             msg.setIcon(QMessageBox.Critical)
             msg.information(self,'Failed', 'Xóa nhà xuất bản thất bại')
-            
+#DELETE TAC GIA            
     def handleDeleteTacGia(self):
         db=mydb()
         msg = QMessageBox()
@@ -356,7 +356,7 @@ class ql_tp_sach(QWidget):
         else:
             msg.setIcon(QMessageBox.Critical)
             msg.information(self,'Failed', 'Xóa tác giả thất bại')
-            
+#DELETE THE LOAI            
     def handleDeleteTheloai(self):
         db=mydb()
         msg = QMessageBox()
@@ -370,7 +370,7 @@ class ql_tp_sach(QWidget):
         else:
             msg.setIcon(QMessageBox.Critical)
             msg.information(self,'Failed', 'Xóa thể loại thất bại')
-            
+#SEARCH NXB           
     def handleSearchingNXB(self):
         db=mydb()
         manxb = self.ui.lineEdit_manxb.text().strip()
@@ -382,7 +382,7 @@ class ql_tp_sach(QWidget):
             self.ui.tableWidget_nxb.setItem(tablerow, 0, QTableWidgetItem(str(nxb[0])))
             self.ui.tableWidget_nxb.setItem(tablerow, 1, QTableWidgetItem(str(nxb[1])))
             tablerow += 1
-            
+#SEARCH TAC GIA          
     def handleSearchingTacGia(self):
         db=mydb()
         maTacGia = self.ui.lineEdit_maTacGia.text().strip()
@@ -394,7 +394,7 @@ class ql_tp_sach(QWidget):
             self.ui.tableWidget_TacGia.setItem(tablerow, 0, QTableWidgetItem(str(tacgia[0])))
             self.ui.tableWidget_TacGia.setItem(tablerow, 1, QTableWidgetItem(str(tacgia[1])))
             tablerow += 1
-            
+#SEARCH THE LOAI            
     def handleSearchingTheLoai(self):
         db=mydb()
         maTheLoai = self.ui.lineEdit_maTheLoai.text().strip()
@@ -422,7 +422,9 @@ class qlsach(QWidget):
         self.handleLoadTheLoai_CBB()
         self.main_window_instance = main_window_instance
         self.ui.pushButton_5.clicked.connect(self.redirect_to_ql_tp)
+        self.ui.pushButton_6.clicked.connect(self.Reload_Page)
         self.ui.pushButton.clicked.connect(self.handleSearching)
+#EDIT SACH
     def UpdateSach(self):
         masach = self.ui.lineEdit_masach.text().strip()
         tensach = self.ui.lineEdit_tensach.text().strip()
@@ -430,10 +432,12 @@ class qlsach(QWidget):
         manxb = self.ui.comboBox_2.currentIndex()
         maloai = self.ui.comboBox_3.currentIndex()
         mota = self.ui.lineEdit_10.text().strip()
+        sl = self.ui.lineEdit_11.text().strip()
+        # sl = self
         db=mydb()
         msg = QMessageBox()
-        checked = db.handleUpdateSach(masach,tensach,matacgia,manxb,maloai,mota)
-        self.handleLoadSach()
+        checked = db.handleUpdateSach(masach,tensach,matacgia,manxb,maloai,mota,sl)
+        self.Reload_Page()
 
         if checked:
             
@@ -442,7 +446,7 @@ class qlsach(QWidget):
         else:
             msg.setIcon(QMessageBox.Critical)
             msg.information(self,'Failed', 'sửa sách thất bại')  
-          
+#DELETE SACH          
     def DeleteSach(self):
         db=mydb()
         msg = QMessageBox()
@@ -455,12 +459,13 @@ class qlsach(QWidget):
         else:
             msg.setIcon(QMessageBox.Critical)
             msg.information(self,'Failed', 'Xóa sách thất bại')
-
+#ADD SACH
     def addnewbook(self):
         tensach = self.ui.lineEdit_tensach.text()
         matacgia = self.ui.comboBox_1.currentIndex()
         manxb = self.ui.comboBox_2.currentIndex()
         matheloai = self.ui.comboBox_3.currentIndex()
+        sl=self.ui.lineEdit_11.text()
         mota = self.ui.lineEdit_10.text()
         #them sach
 
@@ -469,15 +474,13 @@ class qlsach(QWidget):
         sach['matacgia'] = matacgia
         sach['manxb'] = manxb
         sach['maloai'] = matheloai
+        sach['sl'] = sl
         sach['mota'] = mota
 
         db=mydb()
         msg = QMessageBox()
         checked = db.handleThemSach(sach)
-        self.handleLoadSach()
-        self.ui.lineEdit_masach.setText('')
-        self.ui.lineEdit_tensach.setText('')
-        self.ui.lineEdit_10.setText('')
+        self.Reload_Page()
         if checked:
             
             msg.setIcon(QMessageBox.Information)
@@ -486,7 +489,7 @@ class qlsach(QWidget):
         else:
             msg.setIcon(QMessageBox.Critical)
             msg.information(self,'Failed', 'thêm sách thất bại')  
-
+#lOAD TACGIA CBB
     def handleLoadTacGia_CBB(self):
         
         db= mydb()
@@ -494,18 +497,21 @@ class qlsach(QWidget):
         self.ui.comboBox_1.addItem('')
         for tacgia in tacgia:
             self.ui.comboBox_1.addItem(str(tacgia[1]),str(tacgia[0]))
+#LOAD NXB CBB
     def handleLoadNXB_CBB(self):
         db= mydb()
         nxb=db.handleLoadNXB()
         self.ui.comboBox_2.addItem('')
         for nxb in nxb:
             self.ui.comboBox_2.addItem(str(nxb[1]),str(nxb[0]))
+#LOAD THE LOAI CBB
     def handleLoadTheLoai_CBB(self):
         db= mydb()
         tl=db.handleLoadTheLoai()
         self.ui.comboBox_3.addItem('')
         for tl in tl:
             self.ui.comboBox_3.addItem(str(tl[1]),int(str(tl[0])))
+#LOAD LAI TABLE SACH
     def handleLoadSach(self):
         db=mydb()
         data = db.handleLoadSach()
@@ -517,9 +523,10 @@ class qlsach(QWidget):
             self.ui.tableWidget.setItem(tablerow, 2, QTableWidgetItem(row[2]))
             self.ui.tableWidget.setItem(tablerow, 3, QTableWidgetItem(row[3]))
             self.ui.tableWidget.setItem(tablerow, 4, QTableWidgetItem(row[4]))
-            self.ui.tableWidget.setItem(tablerow, 5, QTableWidgetItem(row[5]))
+            self.ui.tableWidget.setItem(tablerow, 5, QTableWidgetItem(str(row[5])))
+            self.ui.tableWidget.setItem(tablerow, 6, QTableWidgetItem(row[6]))
             tablerow+=1
-    #ham tim kiem sach
+#TIM KIEM SACH
     def handleSearching(self):
         db=mydb()
         masach = self.ui.lineEdit_masach.text().strip()
@@ -527,6 +534,7 @@ class qlsach(QWidget):
         tacgia = self.ui.comboBox_1.currentText()
         nxb = self.ui.comboBox_2.currentText()
         theloai = self.ui.comboBox_3.currentText()
+        
         data = db.handleTimSach(masach, tensach, tacgia, nxb, theloai)
         self.ui.tableWidget.setRowCount(len(data))
         tablerow=0
@@ -537,14 +545,16 @@ class qlsach(QWidget):
                 self.ui.comboBox_1.setCurrentText(str(row[3]))
                 self.ui.comboBox_2.setCurrentText(str(row[2]))
                 self.ui.comboBox_3.setCurrentText(str(row[4]))
-                self.ui.lineEdit_10.setText(row[5])
+                self.ui.lineEdit_11.setText(str(row[5]))
+                self.ui.lineEdit_10.setText(row[6])
 
                 self.ui.tableWidget.setItem(tablerow, 0, QTableWidgetItem(str(row[0])))
                 self.ui.tableWidget.setItem(tablerow, 1, QTableWidgetItem(row[1]))
                 self.ui.tableWidget.setItem(tablerow, 2, QTableWidgetItem(row[2]))
                 self.ui.tableWidget.setItem(tablerow, 3, QTableWidgetItem(row[3]))
                 self.ui.tableWidget.setItem(tablerow, 4, QTableWidgetItem(row[4]))
-                self.ui.tableWidget.setItem(tablerow, 5, QTableWidgetItem(row[5]))
+                self.ui.tableWidget.setItem(tablerow, 5, QTableWidgetItem(str(row[5])))
+                self.ui.tableWidget.setItem(tablerow, 6, QTableWidgetItem(row[6]))
             else:
                 self.ui.lineEdit_masach.setText('')
                 self.ui.lineEdit_tensach.setText('')
@@ -557,18 +567,27 @@ class qlsach(QWidget):
                 self.ui.tableWidget.setItem(tablerow, 2, QTableWidgetItem(row[2]))
                 self.ui.tableWidget.setItem(tablerow, 3, QTableWidgetItem(row[3]))
                 self.ui.tableWidget.setItem(tablerow, 4, QTableWidgetItem(row[4]))
-                self.ui.tableWidget.setItem(tablerow, 5, QTableWidgetItem(row[5]))
+                self.ui.tableWidget.setItem(tablerow, 5, QTableWidgetItem(str(row[5])))
+                self.ui.tableWidget.setItem(tablerow, 6, QTableWidgetItem(row[6]))
                 tablerow+=1
-        
+#CHUYEN HUONG DEN QL_TP       
     def redirect_to_ql_tp(self):
         # Change the stackedWidget index in MainWindow to 7
         self.main_window_instance.ui.orders_btn_1.setChecked(False)
         self.main_window_instance.ui.orders_btn_2.setChecked(False)
         self.main_window_instance.ui.pushButton.setChecked(True)
         self.main_window_instance.ui.pushButton_2.setChecked(True)
-        self.main_window_instance.ui.stackedWidget.setCurrentIndex(7)         
-    
-
+        self.main_window_instance.ui.stackedWidget.setCurrentIndex(7)           
+#RELOAD PAGE SACH
+    def Reload_Page(self):
+        self.handleLoadSach()
+        self.ui.comboBox_1.setCurrentIndex(0)
+        self.ui.comboBox_2.setCurrentIndex(0)
+        self.ui.comboBox_3.setCurrentIndex(0)
+        self.ui.lineEdit_masach.setText("")
+        self.ui.lineEdit_tensach.setText("")
+        self.ui.lineEdit_10.setText("")
+        self.ui.lineEdit_11.setText("")
 class MainWindow(QMainWindow):
     def __init__(self, login_instance):
         super(MainWindow, self).__init__()
