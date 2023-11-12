@@ -21,14 +21,14 @@ class profile(QWidget):
         self.ui.comboBox_district.currentIndexChanged.connect(self.updateComboPhuong)
         self.handleLoadProfile()
         self.ui.pushButton.clicked.connect(self.handleEditProfile)
-    
+#LOAD HUYEN    
     def handleLoadHuyen(self):
         db= mydb()
         districts = db.handleLoadHuyen()
         self.ui.comboBox_district.addItem('')
         for district in districts:
             self.ui.comboBox_district.addItem(str(district[1]),str(district[0]))
-               
+#UPDATE COMBO PHUONG              
     def updateComboPhuong(self, index):
         self.ui.comboBox_ward.clear()
         db= mydb()
@@ -36,7 +36,7 @@ class profile(QWidget):
         self.ui.comboBox_ward.addItem('')
         for ward in wards:
             self.ui.comboBox_ward.addItem(str(ward[1]),str(ward[0]))
-                 
+#LOAD PROFILE                 
     def handleLoadProfile(self):
         db = mydb()
         data = db.handleLoadProfile(self.madocgia)
@@ -64,7 +64,7 @@ class profile(QWidget):
         self.ui.lineEdit_street.setText(diachi)
         self.ui.comboBox_district.setCurrentText(huyen)
         self.ui.comboBox_ward.setCurrentText(phuong)
-    
+#EDIT PROFILE   
     def handleEditProfile(self):
         db= mydb()
         msg = QMessageBox()
@@ -121,7 +121,7 @@ class profile(QWidget):
         else:
             msg.setIcon(QMessageBox.Critical)
             msg.information(self,'Failed', 'Sửa profile thất bại')
-
+#VALID DATE
     def is_valid_date(self, date_string):
         try:
             # Attempt to parse the date string
@@ -138,7 +138,7 @@ class change_password(QWidget):
         self.ui.setupUi(self)
         self.madocgia = logged_in_user
         self.ui.changePass_Btn.clicked.connect(self.changePassword)
-        
+#CHANGE PASSWORD        
     def changePassword(self):
         db = mydb()
         msg = QMessageBox()
@@ -185,7 +185,7 @@ class ql_tp_sach(QWidget):
         self.ui.pushButton_timnxb.clicked.connect(self.handleSearchingNXB)
         self.ui.pushButton_timTacGia.clicked.connect(self.handleSearchingTacGia)
         self.ui.pushButton_theLoai.clicked.connect(self.handleSearchingTheLoai)
-       
+#LOAD TABLE TAC GIA      
     def handleLoadTacGia_table(self):
         db= mydb()
         tacgia=db.handleLoadTacGia()
@@ -195,7 +195,7 @@ class ql_tp_sach(QWidget):
             self.ui.tableWidget_TacGia.setItem(tablerow, 0, QTableWidgetItem(str(tacgia[0])))
             self.ui.tableWidget_TacGia.setItem(tablerow, 1, QTableWidgetItem(str(tacgia[1])))
             tablerow += 1
-
+#LOAD TABLE NXB
     def handleLoadNXB_table(self):
         db= mydb()
         nxb=db.handleLoadNXB()
@@ -205,7 +205,7 @@ class ql_tp_sach(QWidget):
             self.ui.tableWidget_nxb.setItem(tablerow, 0, QTableWidgetItem(str(nxb[0])))
             self.ui.tableWidget_nxb.setItem(tablerow, 1, QTableWidgetItem(str(nxb[1])))
             tablerow += 1
-            
+#LOAD TABLE THE LOAI           
     def handleLoadTheLoai_table(self):
         db= mydb()
         tl=db.handleLoadTheLoai()
@@ -215,7 +215,7 @@ class ql_tp_sach(QWidget):
             self.ui.tableWidget_theLoai.setItem(tablerow, 0, QTableWidgetItem(str(tl[0])))
             self.ui.tableWidget_theLoai.setItem(tablerow, 1, QTableWidgetItem(str(tl[1])))
             tablerow += 1
-    
+#ADD NXB    
     def handleAddNXB(self):
         db=mydb()
         msg = QMessageBox()
@@ -228,7 +228,7 @@ class ql_tp_sach(QWidget):
         else:
             msg.setIcon(QMessageBox.Critical)
             msg.information(self,'Failed', 'Thêm nhà xuất bản thất bại')
-        
+#ADD TACGIA        
     def handleAddTacGia(self):
         db=mydb()
         msg = QMessageBox()
@@ -241,7 +241,7 @@ class ql_tp_sach(QWidget):
         else:
             msg.setIcon(QMessageBox.Critical)
             msg.information(self,'Failed', 'Thêm tác giả thất bại')
-        
+#ADD THE LOAI       
     def handleAddTheLoai(self):
         db=mydb()
         msg = QMessageBox()
@@ -254,7 +254,7 @@ class ql_tp_sach(QWidget):
         else:
             msg.setIcon(QMessageBox.Critical)
             msg.information(self,'Failed', 'Thêm thể loại thất bại')
-        
+#EDIT NXB       
     def handleEditNXB(self):
         db=mydb()
         msg = QMessageBox()
@@ -268,7 +268,7 @@ class ql_tp_sach(QWidget):
         else:
             msg.setIcon(QMessageBox.Critical)
             msg.information(self,'Failed', 'Sửa nhà xuất bản thất bại')
-        
+#EDIT TAC GIA       
     def handleEditTacGia(self):
         db=mydb()
         msg = QMessageBox()
@@ -282,7 +282,7 @@ class ql_tp_sach(QWidget):
         else:
             msg.setIcon(QMessageBox.Critical)
             msg.information(self,'Failed', 'Sửa tác giả thất bại')
-        
+#EDIT THE LOAI        
     def handleEditTheLoai(self):
         db=mydb()
         msg = QMessageBox()
@@ -296,7 +296,7 @@ class ql_tp_sach(QWidget):
         else:
             msg.setIcon(QMessageBox.Critical)
             msg.information(self,'Failed', 'Sửa thể loại thất bại')
-        
+#DELETE NXB        
     def handleDeleteNXB(self):
         db=mydb()
         msg = QMessageBox()
@@ -310,7 +310,7 @@ class ql_tp_sach(QWidget):
         else:
             msg.setIcon(QMessageBox.Critical)
             msg.information(self,'Failed', 'Xóa nhà xuất bản thất bại')
-            
+#DELETE TAC GIA            
     def handleDeleteTacGia(self):
         db=mydb()
         msg = QMessageBox()
@@ -324,7 +324,7 @@ class ql_tp_sach(QWidget):
         else:
             msg.setIcon(QMessageBox.Critical)
             msg.information(self,'Failed', 'Xóa tác giả thất bại')
-            
+#DELETE THE LOAI            
     def handleDeleteTheloai(self):
         db=mydb()
         msg = QMessageBox()
@@ -338,7 +338,7 @@ class ql_tp_sach(QWidget):
         else:
             msg.setIcon(QMessageBox.Critical)
             msg.information(self,'Failed', 'Xóa thể loại thất bại')
-            
+#SEARCH NXB           
     def handleSearchingNXB(self):
         db=mydb()
         manxb = self.ui.lineEdit_manxb.text().strip()
@@ -350,7 +350,7 @@ class ql_tp_sach(QWidget):
             self.ui.tableWidget_nxb.setItem(tablerow, 0, QTableWidgetItem(str(nxb[0])))
             self.ui.tableWidget_nxb.setItem(tablerow, 1, QTableWidgetItem(str(nxb[1])))
             tablerow += 1
-            
+#SEARCH TAC GIA          
     def handleSearchingTacGia(self):
         db=mydb()
         maTacGia = self.ui.lineEdit_maTacGia.text().strip()
@@ -362,7 +362,7 @@ class ql_tp_sach(QWidget):
             self.ui.tableWidget_TacGia.setItem(tablerow, 0, QTableWidgetItem(str(tacgia[0])))
             self.ui.tableWidget_TacGia.setItem(tablerow, 1, QTableWidgetItem(str(tacgia[1])))
             tablerow += 1
-            
+#SEARCH THE LOAI            
     def handleSearchingTheLoai(self):
         db=mydb()
         maTheLoai = self.ui.lineEdit_maTheLoai.text().strip()
@@ -391,6 +391,7 @@ class qlsach(QWidget):
         self.main_window_instance = main_window_instance
         self.ui.pushButton_5.clicked.connect(self.redirect_to_ql_tp)
         self.ui.pushButton.clicked.connect(self.handleSearching)
+#EDIT SACH
     def UpdateSach(self):
         masach = self.ui.lineEdit_masach.text().strip()
         tensach = self.ui.lineEdit_tensach.text().strip()
@@ -410,7 +411,7 @@ class qlsach(QWidget):
         else:
             msg.setIcon(QMessageBox.Critical)
             msg.information(self,'Failed', 'sửa sách thất bại')  
-          
+#DELETE SACH          
     def DeleteSach(self):
         db=mydb()
         msg = QMessageBox()
@@ -423,7 +424,7 @@ class qlsach(QWidget):
         else:
             msg.setIcon(QMessageBox.Critical)
             msg.information(self,'Failed', 'Xóa sách thất bại')
-
+#ADD SACH
     def addnewbook(self):
         tensach = self.ui.lineEdit_tensach.text()
         matacgia = self.ui.comboBox_1.currentIndex()
@@ -454,7 +455,7 @@ class qlsach(QWidget):
         else:
             msg.setIcon(QMessageBox.Critical)
             msg.information(self,'Failed', 'thêm sách thất bại')  
-
+#lOAD TACGIA CBB
     def handleLoadTacGia_CBB(self):
         
         db= mydb()
@@ -462,18 +463,21 @@ class qlsach(QWidget):
         self.ui.comboBox_1.addItem('')
         for tacgia in tacgia:
             self.ui.comboBox_1.addItem(str(tacgia[1]),str(tacgia[0]))
+#LOAD NXB CBB
     def handleLoadNXB_CBB(self):
         db= mydb()
         nxb=db.handleLoadNXB()
         self.ui.comboBox_2.addItem('')
         for nxb in nxb:
             self.ui.comboBox_2.addItem(str(nxb[1]),str(nxb[0]))
+#LOAD THE LOAI CBB
     def handleLoadTheLoai_CBB(self):
         db= mydb()
         tl=db.handleLoadTheLoai()
         self.ui.comboBox_3.addItem('')
         for tl in tl:
             self.ui.comboBox_3.addItem(str(tl[1]),int(str(tl[0])))
+#LOAD LAI TABLE SACH
     def handleLoadSach(self):
         db=mydb()
         data = db.handleLoadSach()
@@ -487,7 +491,7 @@ class qlsach(QWidget):
             self.ui.tableWidget.setItem(tablerow, 4, QTableWidgetItem(row[4]))
             self.ui.tableWidget.setItem(tablerow, 5, QTableWidgetItem(row[5]))
             tablerow+=1
-    #ham tim kiem sach
+#TIM KIEM SACH
     def handleSearching(self):
         db=mydb()
         masach = self.ui.lineEdit_masach.text().strip()
