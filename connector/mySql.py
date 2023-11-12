@@ -331,7 +331,7 @@ class mydb:
         if not maloai or not tenloai:
             return False
         else: 
-            sql = "UPDATE tacgia SET tenloai = %s WHERE maloai = %s"
+            sql = "UPDATE theloai SET tenloai = %s WHERE maloai = %s"
             val = (tenloai, maloai)
         try:
             cursor = self.mydb.cursor()

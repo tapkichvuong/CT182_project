@@ -274,7 +274,7 @@ class ql_tp_sach(QWidget):
         msg = QMessageBox()
         maTacGia = self.ui.lineEdit_maTacGia.text().strip()
         tenTacGia = self.ui.lineEdit_tenTacGia.text().strip()
-        check = db.handleTimTacGia(maTacGia, tenTacGia)
+        check = db.handleSuaTacGia(maTacGia, tenTacGia)
         self.handleLoadTacGia_table()
         if check:
             msg.setIcon(QMessageBox.Information)
@@ -288,7 +288,7 @@ class ql_tp_sach(QWidget):
         msg = QMessageBox()
         maTheLoai = self.ui.lineEdit_maTheLoai.text().strip()
         tenTheLoai = self.ui.lineEdit_tenTheLoai.text().strip()
-        check = db.handleTimTheLoai(maTheLoai, tenTheLoai)
+        check = db.handleSuaTheLoai(maTheLoai, tenTheLoai)
         self.handleLoadTheLoai_table()
         if check:
             msg.setIcon(QMessageBox.Information)
