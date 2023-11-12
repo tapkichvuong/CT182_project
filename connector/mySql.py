@@ -14,8 +14,130 @@ class mydb:
             password = "123456",
             database = "qlthuvien"
         )
-    
+    def handleLoadTinhTrang_CBB(self):
+        cursor = self.mydb.cursor()
+        sql= "select * from tinhtrang"
+        cursor.execute(sql)
+        tt =cursor.fetchall()
+        return tt
+    # xu ly tim nhanh sach muon
+    def handleSearchSachNhanh(self,masach):
+        cursor = self.mydb.cursor()
+        sql = """
+                SELECT masach,tensach,sl
+                FROM sach
+                WHERE masach = %s
+                
+            """
+        val = (masach,)
+        
+        cursor.execute(sql, val)
+        results =cursor.fetchall()
+        return results
+    # xu ly tim nhanh doc gia
+    def handleSearchDocGiaNhanh(self,madocgia):
+        cursor = self.mydb.cursor()
+        sql = """
+                SELECT madocgia,RTRIM(LTRIM(
+        CONCAT(
+            COALESCE(firstname + ' ', '')
+            , COALESCE(lastname, '')
+        )
+        )) AS Name
+                FROM docgia
+                WHERE madocgia =%s
+                
+            """
+        val = (madocgia,)
+        
+        cursor.execute(sql, val)
+        results =cursor.fetchall()
+        return results
+    #xu ly them muon sach
+    def handleThemSachMuon(self,muon,masach):
+        try:
+            cursor = self.mydb.cursor()
+            
+            sql = "INSERT INTO muon(masach,madocgia,ngaymuon,matt) VALUES (%s, %s, %s, %s)"
+            val = (masach, muon['madocgia'], muon['ngaymuon'],muon['matt'])
+            cursor.execute(sql, val)
+            
+            # sql1 = "UPDATE SACH SET sl =(sl - 1) WHERE masach = %s"
+            # val1 = (masach)
+            # cursor.execute(sql1,val1)
+            cursor.close()
 
+            
+            self.mydb.commit()
+            
+            return True
+        except Error  as e:
+            
+            if "1062" in str(e):
+                print("Error: Duplicate entry detected!")
+                return False
+            else:
+                print("Error:", e)
+                return False
+        finally:
+            self.mydb.close() 
+    #xu ly xoa muon
+    def handleXoaSachMuon(self, masach,madocgia):
+        if not masach:
+            return False
+        else:
+            sql = "DELETE FROM sach WHERE masach = %s"
+            val = (masach,)
+        try:
+            cursor = self.mydb.cursor()
+            cursor.execute(sql, val)
+            # print(cursor)
+            cursor.close()
+            self.mydb.commit()
+            return True
+        except Error  as e:
+            print(e)
+            return False
+    #xu ly cap nhat muon tra sach
+    def handleUpdateSachMuon(self,masach,muon):
+        if not masach and not muon['madocgia']:
+            return False
+        else: 
+            sql = "UPDATE muon SET ngaytra=%s ,matt=%s WHERE madocgia =%s and masach=%s"
+            val = (muon['ngaytra'],muon['matt'],muon['madocgia'],masach)
+            
+        try:
+            cursor = self.mydb.cursor()
+            cursor.execute(sql, val)
+            # print(cursor)
+            cursor.close()
+            self.mydb.commit()
+            return True
+        except Error  as e:
+            print(e)
+            return False  
+    #xu ly tim ls muon cua doc gia
+    def handleTimLsMuon(self,madocgia):
+        cursor = self.mydb.cursor()
+        sql = """
+                SELECT docgia.madocgia,RTRIM(LTRIM(CONCAT(COALESCE(docgia.firstname + ' ', ''),COALESCE(docgia.lastname, '')))) AS Name,muon.masach,sach.tensach,
+                muon.ngaymuon,muon.ngaytra,tinhtrang.tinhtrang
+                FROM muon
+                    
+                    
+                    JOIN docgia ON docgia.madocgia =%s
+                    
+                    JOIN sach ON muon.masach =sach.masach
+                    JOIN tinhtrang ON tinhtrang.matt = muon.matt
+                WHERE  muon.madocgia =%s
+                order by muon.madocgia
+                    
+            """
+        val = (madocgia,madocgia)
+        
+        cursor.execute(sql, val)
+        results =cursor.fetchall()
+        return results
     # lay du lieu cua ban sach
     def handleLoadSach(self):
         cursor = self.mydb.cursor()

@@ -141,6 +141,14 @@ VALUES
 (8, 'NXB Tài chính'),
 (9, 'NXB Hội Nhà văn');
 
+INSERT INTO tinhtrang
+VALUES 
+(0, 'Đang Mượn'), 
+(1, 'Đã Trả'),
+(2, 'Trễ Hạn'),
+(3, 'Mất'),
+(4, 'Hỏng'); 
+
 insert into sach (tensach,matacgia,manxb,maloai,mota) values
 ('Người tình', 1, 6, 1,10, 'Câu chuyện tình yêu giữa một cô gái trẻ Việt Nam và một chàng trai Pháp trong bối cảnh chiến tranh Việt Nam.'),
 ('Cánh đồng bất tận', 2, 5, 1,10, 'Câu chuyện về cuộc sống của những người dân nghèo ở miền Tây sông nước.'),

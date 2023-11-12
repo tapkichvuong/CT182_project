@@ -63,10 +63,15 @@ create table muon(
 	masach int,
     madocgia varchar(8),
     ngaymuon date,
-    ngaytra date,
-    trangthai int,
+    ngaytra date null,
+    matt int,
     CONSTRAINT FK_muonsach FOREIGN KEY (masach) REFERENCES sach(masach),
+    CONSTRAINT FK_muontinhtrang FOREIGN KEY (matt) REFERENCES tinhtrang(matt),
     CONSTRAINT FK_muondocgia FOREIGN KEY (madocgia) REFERENCES docgia(madocgia)
+);
+create table tinhtrang(
+	matt int primary key,
+    tinhtrang varchar(20)
 );
 
 

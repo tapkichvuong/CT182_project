@@ -2,13 +2,14 @@ import sys
 from PyQt5.QtWidgets import QMainWindow, QApplication, QPushButton, QWidget, QTableWidgetItem, QHeaderView, QMessageBox
 from PyQt5.QtCore import pyqtSlot, QFile, QTextStream
 from hashlib import sha256
-from datetime import datetime
+from datetime import date
 
 from mainwindow.Ui_sidebar import Ui_MainWindow
 from mainwindow.Ui_qlsach import Ui_Form
 from mainwindow.Ui_ql_tp_sach import Ui_ql_tp_sach
 from mainwindow.Ui_change_password import Ui_change_pass_page
 from mainwindow.Ui_profile import Ui_Profile
+from mainwindow.Ui_ql_muontra import Ui_Muontra
 from connector.mySql import mydb
 
 class profile(QWidget):
@@ -444,7 +445,7 @@ class qlsach(QWidget):
         sach['maloai'] = matheloai
         sach['sl'] = sl
         sach['mota'] = mota
-
+       
         db=mydb()
         msg = QMessageBox()
         checked = db.handleThemSach(sach)
@@ -547,6 +548,7 @@ class qlsach(QWidget):
         self.main_window_instance.ui.pushButton_2.setChecked(True)
         self.main_window_instance.ui.stackedWidget.setCurrentIndex(7)           
 #RELOAD PAGE SACH
+
     def Reload_Page(self):
         self.handleLoadSach()
         self.ui.comboBox_1.setCurrentIndex(0)
@@ -556,17 +558,156 @@ class qlsach(QWidget):
         self.ui.lineEdit_tensach.setText("")
         self.ui.lineEdit_10.setText("")
         self.ui.lineEdit_11.setText("")
+class ql_muontra(QWidget):
+    def __init__ (self):
+        super(ql_muontra,self). __init__()
+        self.ui = Ui_Muontra()
+        self.ui.setupUi(self)
+        self.handleLoadTinhTrang_CBB()
+        self.ui.btn_timdg.clicked.connect(self.handleSearchDocGiaNhanh)
+        self.ui.btn_timsach.clicked.connect(self.handleSearchSachNhanh)
+        self.ui.btn_them.clicked.connect(self.addnewMuonSach)
+        self.ui.btn_tim_muon_tra.clicked.connect(self.handleSearchingLsMuon)
+        self.ui.btn_update.clicked.connect(self.UpdateMT)
+#EDIT MUONTRA
+    def UpdateMT(self):
+        masach = self.ui.lineEdit_masach.text().strip()
+        madocgia = self.ui.lineEdit_madocgia.text().strip()
+        matt = self.ui.comboBox_tinhtrang.currentIndex()
+        if matt==1:
+            ngaytra = date.today()
+        else:
+            ngaytra = None
+
+        muon = {}
+        muon['madocgia'] = madocgia
+        
+        muon['matt'] = matt
+        muon['ngaytra'] = ngaytra
+        
+        print(muon)
+        db=mydb()
+        msg = QMessageBox()
+        checked = db.handleUpdateSachMuon(masach,muon)
+        # self.Reload_Page()
+
+        if checked:
+            
+            msg.setIcon(QMessageBox.Information)
+            msg.information(self,'Success', 'sửa thành công')
+        else:
+            msg.setIcon(QMessageBox.Critical)
+            msg.information(self,'Failed', 'sửa thất bại')  
+#DELETE MUONTRA          
+    def DeleteMT(self):
+        db=mydb()
+        msg = QMessageBox()
+        masach = self.ui.lineEdit_masach.text()
+        madocgia = self.ui.lineEdit_madocgia.text()
+        check = db.handleXoaMT(masach,madocgia)
+        # self.handleLoadMT()
+        if check:
+            msg.setIcon(QMessageBox.Information)
+            msg.information(self,'Success', 'Xóa thành công')
+        else:
+            msg.setIcon(QMessageBox.Critical)
+            msg.information(self,'Failed', 'Xóa thất bại')
+#ADD MUON
+    def addnewMuonSach(self):
+        masach = self.ui.lineEdit_masach.text().strip()
+        matt = 0
+        madocgia = self.ui.lineEdit_madocgia.text()
+        ngaymuon=date.today()
+        
+        #them muon
+        muon = {}
+        muon['madocgia'] = madocgia
+        
+        muon['matt'] = matt
+        muon['ngaymuon'] = ngaymuon
+        
+       
+        
+        db=mydb()
+        msg = QMessageBox()
+        checked = db.handleThemSachMuon(muon,masach)
+        # self.Reload_Page()
+        if checked:
+            
+            msg.setIcon(QMessageBox.Information)
+            msg.information(self,'Success', 'thêm thành công')
+            
+        else:
+            msg.setIcon(QMessageBox.Critical)
+            msg.information(self,'Failed', 'thêm thất bại')  
+#lOAD TINH TRANG CBB
+    def handleLoadTinhTrang_CBB(self):
+        db=mydb()
+        tt=db.handleLoadTinhTrang_CBB()
+        # self.ui.comboBox_tinhtrang.addItem('')
+        for tt in tt:
+            self.ui.comboBox_tinhtrang.addItem(str(tt[1]),tt[0])
+#TIM KIEM LICH SU MUON CUA DOC GIA 
+    def handleSearchingLsMuon(self):
+        db=mydb()
+        madocgia = self.ui.lineEdit_madocgia.text().strip()
+        data = db.handleTimLsMuon(madocgia)
+        self.ui.tbl_muontra.setRowCount(len(data))
+        tablerow=0
+        for row in data:
+                self.ui.tbl_muontra.setItem(tablerow, 0, QTableWidgetItem(str(row[0])))
+                self.ui.tbl_muontra.setItem(tablerow, 1, QTableWidgetItem(row[1]))
+                self.ui.tbl_muontra.setItem(tablerow, 2, QTableWidgetItem(str(row[2])))
+                self.ui.tbl_muontra.setItem(tablerow, 3, QTableWidgetItem(row[3]))
+                self.ui.tbl_muontra.setItem(tablerow, 4, QTableWidgetItem(str(row[4])))
+                self.ui.tbl_muontra.setItem(tablerow, 5, QTableWidgetItem(str(row[5])))
+                self.ui.tbl_muontra.setItem(tablerow, 6, QTableWidgetItem(row[6]))
+                tablerow+=1  
+#TIM KIEM SACH NHANH
+    def handleSearchSachNhanh(self):
+        db=mydb()
+        masach = self.ui.lineEdit_masach.text().strip()
+        data = db.handleSearchSachNhanh(masach)
+        self.ui.table_sach.setRowCount(len(data))
+        tablerow=0
+        for row in data:
+            self.ui.table_sach.setItem(tablerow, 0, QTableWidgetItem(str(row[0])))
+            self.ui.table_sach.setItem(tablerow, 1, QTableWidgetItem(row[1]))
+            self.ui.table_sach.setItem(tablerow, 2, QTableWidgetItem(str(row[2])))
+#TIM KIEM DOC GIA NHANH
+    def handleSearchDocGiaNhanh(self):
+        db=mydb()
+        madocgia = self.ui.lineEdit_madocgia.text().strip()
+        data = db.handleSearchDocGiaNhanh(madocgia)
+        self.ui.table_docgia.setRowCount(len(data))
+        tablerow=0
+        for row in data:
+            self.ui.table_docgia.setItem(tablerow, 0, QTableWidgetItem(row[0]))
+            self.ui.table_docgia.setItem(tablerow, 1, QTableWidgetItem(row[1]))
+#RELOAD PAGE MUON TRA
+    def Reload_Page(self):
+        self.ui.comboBox_tinhtrang.setCurrentIndex(0)
+        self.ui.lineEdit_masach.setText("")
+        self.ui.lineEdit_madocgia.setText("")
+        
 class MainWindow(QMainWindow):
     def __init__(self, login_instance):
         super(MainWindow, self).__init__()
         #get login user
         self.logged_in_user = login_instance
+        
+        
         #create GUI
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
 
         self.qlsach =qlsach(self)
         self.ui.gridLayout_4.addWidget(self.qlsach,0,0,1,1)
+
+        
+        self.ql_muontra = ql_muontra()
+        self.ui.gridLayout_5.addWidget(self.ql_muontra,0,0,1,1)
+        
         
         self.ql_tp = ql_tp_sach()
         self.ui.gridLayout_9.addWidget(self.ql_tp, 0,0,1,1)
@@ -615,8 +756,8 @@ class MainWindow(QMainWindow):
     def on_home_btn_1_toggled(self):
         self.ui.stackedWidget.setCurrentIndex(0)
     
-    def on_home_btn_2_toggled(self):
-        self.ui.stackedWidget.setCurrentIndex(0)
+    # def on_home_btn_2_toggled(self):
+    #     self.ui.stackedWidget.setCurrentIndex(0)
 
     def on_dashborad_btn_1_toggled(self):
         self.ui.stackedWidget.setCurrentIndex(1)
