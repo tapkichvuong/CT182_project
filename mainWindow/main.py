@@ -400,9 +400,11 @@ class qlsach(QWidget):
         manxb = self.ui.comboBox_2.currentIndex()
         maloai = self.ui.comboBox_3.currentIndex()
         mota = self.ui.lineEdit_10.text().strip()
+        sl = self.ui.lineEdit_11.text().strip()
+        # sl = self
         db=mydb()
         msg = QMessageBox()
-        checked = db.handleUpdateSach(masach,tensach,matacgia,manxb,maloai,mota)
+        checked = db.handleUpdateSach(masach,tensach,matacgia,manxb,maloai,mota,sl)
         self.Reload_Page()
 
         if checked:
@@ -431,6 +433,7 @@ class qlsach(QWidget):
         matacgia = self.ui.comboBox_1.currentIndex()
         manxb = self.ui.comboBox_2.currentIndex()
         matheloai = self.ui.comboBox_3.currentIndex()
+        sl=self.ui.lineEdit_11.text()
         mota = self.ui.lineEdit_10.text()
         #them sach
 
@@ -439,15 +442,13 @@ class qlsach(QWidget):
         sach['matacgia'] = matacgia
         sach['manxb'] = manxb
         sach['maloai'] = matheloai
+        sach['sl'] = sl
         sach['mota'] = mota
 
         db=mydb()
         msg = QMessageBox()
         checked = db.handleThemSach(sach)
-        self.handleLoadSach()
-        self.ui.lineEdit_masach.setText('')
-        self.ui.lineEdit_tensach.setText('')
-        self.ui.lineEdit_10.setText('')
+        self.Reload_Page()
         if checked:
             
             msg.setIcon(QMessageBox.Information)
@@ -490,7 +491,8 @@ class qlsach(QWidget):
             self.ui.tableWidget.setItem(tablerow, 2, QTableWidgetItem(row[2]))
             self.ui.tableWidget.setItem(tablerow, 3, QTableWidgetItem(row[3]))
             self.ui.tableWidget.setItem(tablerow, 4, QTableWidgetItem(row[4]))
-            self.ui.tableWidget.setItem(tablerow, 5, QTableWidgetItem(row[5]))
+            self.ui.tableWidget.setItem(tablerow, 5, QTableWidgetItem(str(row[5])))
+            self.ui.tableWidget.setItem(tablerow, 6, QTableWidgetItem(row[6]))
             tablerow+=1
 #TIM KIEM SACH
     def handleSearching(self):
@@ -500,6 +502,7 @@ class qlsach(QWidget):
         tacgia = self.ui.comboBox_1.currentText()
         nxb = self.ui.comboBox_2.currentText()
         theloai = self.ui.comboBox_3.currentText()
+        
         data = db.handleTimSach(masach, tensach, tacgia, nxb, theloai)
         self.ui.tableWidget.setRowCount(len(data))
         tablerow=0
@@ -510,14 +513,16 @@ class qlsach(QWidget):
                 self.ui.comboBox_1.setCurrentText(str(row[3]))
                 self.ui.comboBox_2.setCurrentText(str(row[2]))
                 self.ui.comboBox_3.setCurrentText(str(row[4]))
-                self.ui.lineEdit_10.setText(row[5])
+                self.ui.lineEdit_11.setText(str(row[5]))
+                self.ui.lineEdit_10.setText(row[6])
 
                 self.ui.tableWidget.setItem(tablerow, 0, QTableWidgetItem(str(row[0])))
                 self.ui.tableWidget.setItem(tablerow, 1, QTableWidgetItem(row[1]))
                 self.ui.tableWidget.setItem(tablerow, 2, QTableWidgetItem(row[2]))
                 self.ui.tableWidget.setItem(tablerow, 3, QTableWidgetItem(row[3]))
                 self.ui.tableWidget.setItem(tablerow, 4, QTableWidgetItem(row[4]))
-                self.ui.tableWidget.setItem(tablerow, 5, QTableWidgetItem(row[5]))
+                self.ui.tableWidget.setItem(tablerow, 5, QTableWidgetItem(str(row[5])))
+                self.ui.tableWidget.setItem(tablerow, 6, QTableWidgetItem(row[6]))
             else:
                 self.ui.lineEdit_masach.setText('')
                 self.ui.lineEdit_tensach.setText('')
@@ -530,7 +535,8 @@ class qlsach(QWidget):
                 self.ui.tableWidget.setItem(tablerow, 2, QTableWidgetItem(row[2]))
                 self.ui.tableWidget.setItem(tablerow, 3, QTableWidgetItem(row[3]))
                 self.ui.tableWidget.setItem(tablerow, 4, QTableWidgetItem(row[4]))
-                self.ui.tableWidget.setItem(tablerow, 5, QTableWidgetItem(row[5]))
+                self.ui.tableWidget.setItem(tablerow, 5, QTableWidgetItem(str(row[5])))
+                self.ui.tableWidget.setItem(tablerow, 6, QTableWidgetItem(row[6]))
                 tablerow+=1
 #CHUYEN HUONG DEN QL_TP       
     def redirect_to_ql_tp(self):
@@ -540,7 +546,7 @@ class qlsach(QWidget):
         self.main_window_instance.ui.pushButton.setChecked(True)
         self.main_window_instance.ui.pushButton_2.setChecked(True)
         self.main_window_instance.ui.stackedWidget.setCurrentIndex(7)           
-#RELOAD PAGE
+#RELOAD PAGE SACH
     def Reload_Page(self):
         self.handleLoadSach()
         self.ui.comboBox_1.setCurrentIndex(0)
@@ -549,6 +555,7 @@ class qlsach(QWidget):
         self.ui.lineEdit_masach.setText("")
         self.ui.lineEdit_tensach.setText("")
         self.ui.lineEdit_10.setText("")
+        self.ui.lineEdit_11.setText("")
 class MainWindow(QMainWindow):
     def __init__(self, login_instance):
         super(MainWindow, self).__init__()

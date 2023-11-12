@@ -14,13 +14,13 @@ class mydb:
             password = "123456",
             database = "qlthuvien"
         )
-    # Printing the connection object 
+    
 
     # lay du lieu cua ban sach
     def handleLoadSach(self):
         cursor = self.mydb.cursor()
         sql = """
-                        SELECT sach.masach, sach.tensach, nxb.tennxb, tacgia.tentacgia, theloai.tenloai, sach.mota, sach.masach
+                        SELECT sach.masach, sach.tensach, nxb.tennxb, tacgia.tentacgia, theloai.tenloai, sach.sl, sach.mota, sach.masach
                         FROM sach
                             JOIN tacgia ON tacgia.matacgia = sach.matacgia
                             JOIN nxb ON nxb.manxb = sach.manxb
@@ -34,8 +34,8 @@ class mydb:
     def handleThemSach(self,sach):
         try:
             cursor = self.mydb.cursor()
-            sql = "INSERT INTO sach (tensach, matacgia, manxb, maloai , mota) VALUES (%s, %s, %s, %s, %s)"
-            val = (sach['tensach'], sach['matacgia'], sach['manxb'],sach['maloai'], sach['mota'])
+            sql = "INSERT INTO sach (tensach, matacgia, manxb, maloai ,sl, mota) VALUES (%s, %s, %s, %s, %s,%s)"
+            val = (sach['tensach'], sach['matacgia'], sach['manxb'],sach['maloai'],sach['sl'], sach['mota'])
             cursor.execute(sql, val)
             # print(cursor)
             cursor.close()
@@ -70,12 +70,12 @@ class mydb:
             print(e)
             return False
     #xu ly cap nhat sach
-    def handleUpdateSach(self,masach,tensach,matacgia,manxb,maloai,mota):
+    def handleUpdateSach(self,masach,tensach,matacgia,manxb,maloai,sl,mota):
         if not masach:
             return False
         else: 
-            sql = "UPDATE sach SET tensach = %s,matacgia = %s,manxb = %s,maloai = %s,mota = %s WHERE masach =%s"
-            val = (tensach,matacgia,manxb,maloai,mota,masach)
+            sql = "UPDATE sach SET tensach = %s,matacgia = %s,manxb = %s,maloai = %s,sl = %s,mota = %s WHERE masach =%s"
+            val = (tensach,matacgia,manxb,maloai,sl,mota,masach)
         try:
             cursor = self.mydb.cursor()
             cursor.execute(sql, val)
@@ -85,13 +85,12 @@ class mydb:
             return True
         except Error  as e:
             print(e)
-            return False
-        
+            return False  
     #xu ly tim sach
     def handleTimSach(self, masach, tensach, tacgia, nxb, theloai):
         cursor = self.mydb.cursor()
         sql = """
-                SELECT sach.masach, sach.tensach, nxb.tennxb, tacgia.tentacgia, theloai.tenloai, sach.mota
+                SELECT sach.masach, sach.tensach, nxb.tennxb, tacgia.tentacgia, theloai.tenloai,sach.sl, sach.mota
                 FROM sach
                     JOIN tacgia ON tacgia.matacgia = sach.matacgia
                     JOIN nxb ON nxb.manxb = sach.manxb
@@ -100,7 +99,7 @@ class mydb:
                     AND sach.tensach LIKE %s
                     AND tacgia.tentacgia LIKE %s
                     AND nxb.tennxb LIKE %s
-                    AND theloai.tenloai LIKE %s
+                    AND theloai.tenloai LIKE %s 
                 ORDER BY masach
             """
         val = (f'{masach}%', f'{tensach}%', f'%{tacgia}%', f'%{nxb}%', f'%{theloai}%')
@@ -115,7 +114,6 @@ class mydb:
         cursor.execute(sql)
         nxb =cursor.fetchall()
         return nxb
-      
     #xu ly them nxb
     def handleThemNXB(self,tennxb):
         try:
@@ -175,8 +173,7 @@ class mydb:
             return True
         except Error  as e:
             print(e)
-            return False
-        
+            return False  
     #xu ly tim nxb
     def handleTimNxb(self, manxb, tennxb):
         cursor = self.mydb.cursor()
@@ -197,7 +194,6 @@ class mydb:
         cursor.execute(sql)
         results =cursor.fetchall()
         return results  
-    
     #xu ly them tac gia
     def handleThemTacGia(self,tentacgia):
         try:
@@ -218,7 +214,6 @@ class mydb:
                 return False
         finally:
             self.mydb.close()
-    
     #xu ly xoa tac gia
     def handleXoaTacGia(self, matacgia, tentacgia):
         if not matacgia and not tentacgia:
@@ -242,7 +237,6 @@ class mydb:
         except Error  as e:
             print(e)
             return False
-        
     #xu ly cap nhat tac gia
     def handleSuaTacGia(self, matacgia, tentacgia):
         if not matacgia or not tentacgia:
@@ -259,8 +253,7 @@ class mydb:
             return True
         except Error  as e:
             print(e)
-            return False
-        
+            return False  
     #xu ly tim tac gia
     def handleTimTacGia(self, matacgia, tentacgia):
         cursor = self.mydb.cursor()
@@ -302,7 +295,6 @@ class mydb:
                 return False
         finally:
             self.mydb.close()
-    
     #xu ly xoa the loai
     def handleXoaTheLoai(self, maloai, tenloai):
         if not maloai and not tenloai:
@@ -382,7 +374,6 @@ class mydb:
                 return False
         finally:
             self.mydb.close() 
-
     # xu li dang nhap
     def handleLogin(self, username, password):
         cursor = self.mydb.cursor()
@@ -393,7 +384,6 @@ class mydb:
         #Bam mat khau 
         hash_pass = sha256(password.encode('utf-8')).hexdigest()
         return (hash_pass == myresult[0])
-    
     # lay ma doc gia nguoi dung dang nhap
     def authenticate(self, username):
         try:
@@ -406,8 +396,7 @@ class mydb:
         except Error as e:
             print(e)
         finally:
-            self.mydb.close()
-            
+            self.mydb.close()          
     # lay mat khau hien tai        
     def getCurrentPassword(self, madocgia):
         try:
@@ -422,7 +411,6 @@ class mydb:
             return password[0]
         except Error as e:
             print(e)
-
     #lay thay doi mat khau
     def changePassword(self, madocgia, password):
         try:
@@ -434,8 +422,7 @@ class mydb:
             results = cursor.fetchall()
             self.mydb.commit()
         except Error as e:
-            print(e)
-    
+            print(e) 
     #load du lieu huyen
     def handleLoadHuyen(self):
         cursor = self.mydb.cursor()
@@ -446,7 +433,6 @@ class mydb:
         cursor.execute(sql)
         results =cursor.fetchall()
         return results
-    
     #load du lieu phuong
     def handleLoadPhuong(self, mahuyen):
         cursor = self.mydb.cursor()
@@ -459,7 +445,6 @@ class mydb:
         cursor.execute(sql, val)
         results =cursor.fetchall()
         return results
-    
     #load profile data
     def handleLoadProfile(self, madocgia):
         cursor = self.mydb.cursor()
@@ -474,7 +459,7 @@ class mydb:
         cursor.execute(sql, val)
         results =cursor.fetchone()
         return results
-    
+    #edit profile
     def handleEditProfile(self, madocgia, profile):
         try:
             cursor = self.mydb.cursor()

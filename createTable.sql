@@ -52,6 +52,7 @@ create table sach(
     matacgia int,
     manxb int,
     maloai int, 
+    sl int,
     mota varchar(300),
     CONSTRAINT FK_sachnxb FOREIGN KEY (matacgia) REFERENCES tacgia(matacgia),
     CONSTRAINT FK_sachtheloai FOREIGN KEY (manxb) REFERENCES nxb(manxb),
@@ -67,4 +68,6 @@ create table muon(
     CONSTRAINT FK_muonsach FOREIGN KEY (masach) REFERENCES sach(masach),
     CONSTRAINT FK_muondocgia FOREIGN KEY (madocgia) REFERENCES docgia(madocgia)
 );
+
+
 
