@@ -390,6 +390,7 @@ class qlsach(QWidget):
         self.handleLoadTheLoai_CBB()
         self.main_window_instance = main_window_instance
         self.ui.pushButton_5.clicked.connect(self.redirect_to_ql_tp)
+        self.ui.pushButton_6.clicked.connect(self.Reload_Page)
         self.ui.pushButton.clicked.connect(self.handleSearching)
 #EDIT SACH
     def UpdateSach(self):
@@ -402,7 +403,7 @@ class qlsach(QWidget):
         db=mydb()
         msg = QMessageBox()
         checked = db.handleUpdateSach(masach,tensach,matacgia,manxb,maloai,mota)
-        self.handleLoadSach()
+        self.Reload_Page()
 
         if checked:
             
@@ -531,16 +532,23 @@ class qlsach(QWidget):
                 self.ui.tableWidget.setItem(tablerow, 4, QTableWidgetItem(row[4]))
                 self.ui.tableWidget.setItem(tablerow, 5, QTableWidgetItem(row[5]))
                 tablerow+=1
-        
+#CHUYEN HUONG DEN QL_TP       
     def redirect_to_ql_tp(self):
         # Change the stackedWidget index in MainWindow to 7
         self.main_window_instance.ui.orders_btn_1.setChecked(False)
         self.main_window_instance.ui.orders_btn_2.setChecked(False)
         self.main_window_instance.ui.pushButton.setChecked(True)
         self.main_window_instance.ui.pushButton_2.setChecked(True)
-        self.main_window_instance.ui.stackedWidget.setCurrentIndex(7)         
-    
-
+        self.main_window_instance.ui.stackedWidget.setCurrentIndex(7)           
+#RELOAD PAGE
+    def Reload_Page(self):
+        self.handleLoadSach()
+        self.ui.comboBox_1.setCurrentIndex(0)
+        self.ui.comboBox_2.setCurrentIndex(0)
+        self.ui.comboBox_3.setCurrentIndex(0)
+        self.ui.lineEdit_masach.setText("")
+        self.ui.lineEdit_tensach.setText("")
+        self.ui.lineEdit_10.setText("")
 class MainWindow(QMainWindow):
     def __init__(self, login_instance):
         super(MainWindow, self).__init__()
