@@ -1,4 +1,6 @@
 import sys
+import typing
+from PyQt5.QtGui import QColor
 from PyQt5.QtWidgets import QMainWindow, QApplication, QPushButton, QWidget, QTableWidgetItem, QHeaderView, QMessageBox
 from PyQt5.QtCore import pyqtSlot, QFile, QTextStream
 from hashlib import sha256
@@ -10,8 +12,38 @@ from mainwindow.Ui_ql_tp_sach import Ui_ql_tp_sach
 from mainwindow.Ui_change_password import Ui_change_pass_page
 from mainwindow.Ui_profile import Ui_Profile
 from mainwindow.Ui_ql_muontra import Ui_Muontra
+from mainwindow.Ui_statistic import Ui_Statistic
+from mainwindow.piechart import SmartChart, SimpleChartView
 from connector.mySql import mydb
 
+class statistic(QWidget):
+    def __init__(self, logged_in_user):
+        super(statistic, self).__init__()
+        self.ui = Ui_Statistic()
+        self.ui.setupUi(self)
+        self.madocgia = logged_in_user
+        self.ui.year_combo_box.addItem("Select Year")  # Placeholder item
+        for year in range(2023, 1900, -1):  # You can adjust the range based on your requirements
+            self.ui.year_combo_box.addItem(str(year))
+        self.ui.month_combo_box.addItem("Select Month")  # Placeholder item
+        for month in range(1, 13):  # You can adjust the range based on your requirements
+            self.ui.month_combo_box.addItem(str(month))
+        self.chart = SmartChart()
+        self.chart.resize(700, 400)
+        self.chart_view = SimpleChartView(self.chart)
+        self.ui.gridLayout_3.addWidget(self.chart_view, 0,0,1,1)
+        self.color = ['#7876e9', '#f05a52', '#fed03d', '#09aa67']
+        self.loadCountTheloai()
+        
+    def loadCountTheloai(self):
+        db = mydb()
+        results = db.loadCountLoai()
+        print(results)
+        i=0
+        for record in results:
+            self.chart.add_slice(record[1], record[2], self.color[i])
+            i+=1
+            
 class profile(QWidget):
     def __init__ (self, logged_in_user):
         super(profile,self). __init__()
@@ -717,6 +749,10 @@ class MainWindow(QMainWindow):
         
         self.profile = profile(self.logged_in_user)
         self.ui.gridLayout_6.addWidget(self.profile, 0,0,1,1)
+        
+        self.statistic = statistic(self.logged_in_user)
+        self.ui.gridLayout_3.addWidget(self.statistic, 0,0,1,1)
+        
         self.ui.icon_only_widget.hide()
         self.ui.stackedWidget.setCurrentIndex(0)
         self.ui.home_btn_2.setChecked(True)
