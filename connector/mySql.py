@@ -54,30 +54,19 @@ class mydb:
         results =cursor.fetchall()
         return results
     #xu ly them muon sach
-    def handleThemSachMuon(self,muon,masach):
+    def handleThemSachMuon(self,muon):
         try:
             cursor = self.mydb.cursor()
             
-            sql = "INSERT INTO muon(masach,madocgia,ngaymuon,matt) VALUES (%s, %s, %s, %s)"
-            val = (masach, muon['madocgia'], muon['ngaymuon'],muon['matt'])
+            sql = "CALL add_new_sach_muon(%s, %s, %s);"
+            val = (muon['madocgia'],muon['masach'],muon['matt'])
             cursor.execute(sql, val)
-            
-            # sql1 = "UPDATE SACH SET sl =(sl - 1) WHERE masach = %s"
-            # val1 = (masach)
-            # cursor.execute(sql1,val1)
             cursor.close()
-
-            
             self.mydb.commit()
             
             return True
         except Error  as e:
-            
-            if "1062" in str(e):
-                print("Error: Duplicate entry detected!")
-                return False
-            else:
-                print("Error:", e)
+                # 
                 return False
         finally:
             self.mydb.close() 
@@ -99,23 +88,41 @@ class mydb:
             print(e)
             return False
     #xu ly cap nhat muon tra sach
-    def handleUpdateSachMuon(self,masach,muon):
-        if not masach and not muon['madocgia']:
+    def handleUpdateSachMuon(self,muon):
+        if not muon['masach'] and not muon['madocgia']:
             return False
         else: 
-            sql = "UPDATE muon SET ngaytra=%s ,matt=%s WHERE madocgia =%s and masach=%s"
-            val = (muon['ngaytra'],muon['matt'],muon['madocgia'],masach)
+            sql = "CALL update_sach_muon(%s, %s, %s);"
+            val = (muon['madocgia'],muon['masach'],muon['matt'])
             
         try:
             cursor = self.mydb.cursor()
             cursor.execute(sql, val)
-            # print(cursor)
+            
             cursor.close()
             self.mydb.commit()
             return True
         except Error  as e:
             print(e)
-            return False  
+            return False   
+    #xu ly sach mat hoac hong
+    def handleUpdateMatHongSach(self,muon):
+        if not muon['masach'] and not muon['madocgia']:
+            return False
+        else: 
+            sql = "CALL tra_sach_mat_hong(%s, %s, %s);"
+            val = (muon['madocgia'],muon['masach'],muon['matt'])
+            
+        try:
+            cursor = self.mydb.cursor()
+            cursor.execute(sql, val)
+            
+            cursor.close()
+            self.mydb.commit()
+            return True
+        except Error  as e:
+            print(e)
+            return False 
     #xu ly tim ls muon cua doc gia
     def handleTimLsMuon(self,madocgia):
         cursor = self.mydb.cursor()

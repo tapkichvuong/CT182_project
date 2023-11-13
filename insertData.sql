@@ -147,7 +147,10 @@ VALUES
 (1, 'Đã Trả'),
 (2, 'Trễ Hạn'),
 (3, 'Mất'),
-(4, 'Hỏng'); 
+(4, 'Hỏng'),
+(5, 'Mất -> đã bồi thường'),
+(6, 'Hỏng -> đã bồi thường');
+
 
 insert into sach (tensach,matacgia,manxb,maloai,mota) values
 ('Người tình', 1, 6, 1,10, 'Câu chuyện tình yêu giữa một cô gái trẻ Việt Nam và một chàng trai Pháp trong bối cảnh chiến tranh Việt Nam.'),
