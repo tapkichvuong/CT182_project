@@ -124,26 +124,24 @@ class mydb:
             print(e)
             return False 
     #xu ly tim ls muon cua doc gia
-    def handleTimLsMuon(self,madocgia):
+    def handleTimLsMuon(self,madocgia, masach):
         cursor = self.mydb.cursor()
         sql = """
                 SELECT docgia.madocgia,RTRIM(LTRIM(CONCAT(COALESCE(docgia.firstname + ' ', ''),COALESCE(docgia.lastname, '')))) AS Name,muon.masach,sach.tensach,
                 muon.ngaymuon,muon.ngaytra,tinhtrang.tinhtrang
                 FROM muon
-                    
-                    
-                    JOIN docgia ON docgia.madocgia =%s
-                    
+                    JOIN docgia ON docgia.madocgia = muon.madocgia
                     JOIN sach ON muon.masach =sach.masach
                     JOIN tinhtrang ON tinhtrang.matt = muon.matt
-                WHERE  muon.madocgia =%s
+                WHERE  muon.madocgia LIKE %s
+                    AND muon.masach = %s
                 order by muon.madocgia
                     
             """
-        val = (madocgia,madocgia)
-        
+        val = (madocgia,masach)
         cursor.execute(sql, val)
         results =cursor.fetchall()
+        print(results)
         return results
     # lay du lieu cua ban sach
     def handleLoadSach(self):

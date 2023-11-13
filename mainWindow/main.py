@@ -767,7 +767,8 @@ class ql_muontra(QWidget):
     def handleSearchingLsMuon(self):
         db=mydb()
         madocgia = self.ui.lineEdit_madocgia.text().strip()
-        data = db.handleTimLsMuon(madocgia)
+        masach = self.ui.lineEdit_masach.text().strip()
+        data = db.handleTimLsMuon(madocgia, masach)
         self.ui.tbl_muontra.setRowCount(len(data))
         tablerow=0
         for row in data:
