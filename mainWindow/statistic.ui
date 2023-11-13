@@ -14,8 +14,27 @@
    <string>Form</string>
   </property>
   <layout class="QGridLayout" name="gridLayout_4">
-   <item row="0" column="0">
-    <layout class="QGridLayout" name="gridLayout">
+   <item row="1" column="0">
+    <layout class="QGridLayout" name="gridLayout_pie">
+     <item row="0" column="0">
+      <widget class="QComboBox" name="pieChart_combo_box">
+       <property name="font">
+        <font>
+         <pointsize>13</pointsize>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">background-color: rgb(255, 246, 247);
+border: 1px solid rgb(116, 30, 240);
+border-radius: 5px;
+padding: 2px;</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item row="2" column="0">
+    <layout class="QGridLayout" name="gridLayout_Line">
      <item row="0" column="0">
       <widget class="QComboBox" name="year_combo_box">
        <property name="font">
@@ -47,12 +66,6 @@ padding: 2px;</string>
       </widget>
      </item>
     </layout>
-   </item>
-   <item row="1" column="0">
-    <layout class="QGridLayout" name="gridLayout_2"/>
-   </item>
-   <item row="2" column="0">
-    <layout class="QGridLayout" name="gridLayout_3"/>
    </item>
   </layout>
  </widget>

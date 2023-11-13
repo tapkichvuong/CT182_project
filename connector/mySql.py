@@ -616,7 +616,57 @@ class mydb:
         except Error as e:
             print(e)
             return False
-            
+        
+    def loadCountTacGia(self):
+        try:
+            cursor = self.mydb.cursor()
+            sql = """SELECT tacgia.matacgia, tacgia.tentacgia, COUNT(sach.masach) AS sach_count
+                        FROM tacgia
+                        LEFT JOIN sach ON tacgia.matacgia = sach.matacgia
+                        GROUP BY tacgia.matacgia, tacgia.tentacgia;
+                """
+            cursor.execute(sql)
+            results = cursor.fetchall()
+            return results
+        except Error as e:
+            print(e)
+            return False
+    def loadCountNXB(self):
+        try:
+            cursor = self.mydb.cursor()
+            sql = """SELECT nxb.manxb, nxb.tennxb, COUNT(sach.masach) AS sach_count
+                        FROM nxb
+                        LEFT JOIN sach ON nxb.manxb = sach.manxb
+                        GROUP BY nxb.manxb, nxb.tennxb;
+                """
+            cursor.execute(sql)
+            results = cursor.fetchall()
+            return results
+        except Error as e:
+            print(e)
+            return False   
+        
+    def handleLoadBorrowFlow(self, thang, nam):
+        try:
+            cursor = self.mydb.cursor()
+            sql = """SELECT 
+                        DAY(ngaymuon) AS BorrowDate,
+                        COUNT(*) AS BooksBorrowedPerDay
+                    FROM 
+                        muon
+                    WHERE 
+                        MONTH(ngaymuon) = %s AND YEAR(ngaymuon) = %s
+                    GROUP BY 
+                        ngaymuon
+                    ORDER BY ngaymuon;
+                """
+            val = (thang, nam)
+            cursor.execute(sql, val)
+            results = cursor.fetchall()
+            return results
+        except Error as e:
+            print(e)
+            return     
     def generate_random_string(self):
         characters = string.digits  # Use uppercase letters and digits
         random_string = ''.join(random.choice(characters) for _ in range(8))

@@ -143,34 +143,3 @@ class SimpleChartView(QChartView):
         super(SimpleChartView, self).__init__(chart)
 
         self.setRenderHint(QPainter.Antialiasing)
-        
-        
-if __name__ == '__main__':
-    """
-    Example
-    """
-
-    class Example(QMainWindow):
-        def __init__(self, datas, parent=None):
-            super(Example, self).__init__(parent)
-
-            chart = SmartChart()
-            chart.resize(700, 400)
-            chart_view = SimpleChartView(chart)
-
-            for data in datas:
-                chart.add_slice(data.name, data.value, data.color)
-
-            self.setCentralWidget(chart_view)
-
-    global win
-    app = QApplication(sys.argv)
-
-    node = Data('Node', 333, "#82d3e5")
-    connection = Data('Connection', 105, "#fd635c")
-    other = Data('Other', 20, "#feb543")
-    datas = [node, connection, other]
-
-    win = Example(datas)
-    win.show()
-    sys.exit(app.exec_())
