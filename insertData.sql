@@ -187,3 +187,28 @@ insert into sach (tensach,matacgia,manxb,maloai,mota) values
 ('Quản trị Marketing', 19, 7, 3,10, 'Cuốn sách cung cấp các kiến thức cơ bản về quản trị marketing, bao gồm các nội dung như: nghiên cứu thị trường, phân tích thị trường, sản phẩm, giá cả, phân phối, xúc tiến bán.'),
 ('Quản trị sản xuất', 18, 7, 3,10, 'Cuốn sách cung cấp các kiến thức cơ bản về quản trị sản xuất, bao gồm các nội dung như: thiết kế sản phẩm, quy trình sản xuất, tổ chức sản xuất, kiểm soát chất lượng, quản lý dự án.'),
 ('Quản trị nhân lực', 18, 7, 3,10, 'Cuốn sách cung cấp các kiến thức cơ bản về quản trị nhân lực, bao gồm các nội dung như: tuyển dụng, đào tạo, phát triển, lương thưởng, đánh giá, sa thải.');
+
+INSERT INTO taikhoan VALUES
+	('johndoe', 'johndoe'),
+	('janesmith', 'janesmith'),
+	('Emily', 'Emily'),
+	('Benjamin', 'Benjamin'),
+	('Jasmine', 'Jasmine'),
+	('Liam', 'Liam'),
+	('Sophia', 'Sophia'),
+	('Noah' , 'Noah'),
+	('Jackson', 'Jackson'),
+	('bobjohnson', 'bobjohnson');
+
+INSERT INTO docgia (madocgia, firstname, lastname, gender, birth, phone, email, username, maphuong, diachi)
+VALUES
+    ('57381246', 'John', 'Doe', 0, '1990-01-15', '1234567890', 'john.doe@example.com', 'johndoe', 37, '123 Main St'),
+    ('19840765', 'Jane', 'Smith', 1, '1985-05-20', '9876543210', 'jane.smith@example.com', 'janesmith', 15, '456 Oak Ave'),
+	('32098754', 'Emily', 'Garcia', 1, '1984-04-22', '9876543210', 'Emily.Garcia@example.com', 'Emily', 68, '456 Oak Ave'),
+    ('86753091', 'Benjamin', 'Anderson', 0, '1987-02-15', '9876543210', 'Benjamin.Anderson@example.com', 'Benjamin', 22, '456 Oak Ave'),
+    ('13579024', 'Jasmine', 'Smith', 0, '1995-08-04', '9876543210', 'Jasmine.smith@example.com', 'Jasmine', 51, '456 Oak Ave'),
+    ('24680135', 'Liam', 'Williams', 0, '1982-11-20', '9876543210', 'Liam.Williams@example.com', 'Liam', 79, '456 Oak Ave'),
+    ('98127456', 'Sophia', 'Taylor', 1, '1979-06-03', '9876543210', 'Sophia.Taylor@example.com', 'Sophia', 44, '456 Oak Ave'),
+    ('75312489', 'Noah', 'Smith', 0, '1986-09-25', '9876543210', 'Noah.smith@example.com', 'Noah', 12, '456 Oak Ave'),
+    ('60928347', 'Jackson', 'White', 0, '1992-03-11', '9876543210', 'jane.smith@example.com', 'Jackson', 63, '456 Oak Ave'),
+    ('62475918', 'Bob', 'Johnson', 0, '1988-08-10', '5555555555', 'bob.johnson@example.com', 'bobjohnson', 31, '789 Pine Rd');
