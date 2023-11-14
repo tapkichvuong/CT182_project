@@ -15,6 +15,9 @@ class ql_muontra(QWidget):
         self.ui.btn_tim_muon_tra.clicked.connect(self.handleSearchingLsMuon)
         self.ui.btn_update.clicked.connect(self.UpdateMT)
         self.ui.btn_update.clicked.connect(self.handleSearchingLsMuon)
+        self.ui.btn_update.clicked.connect(self.handleSearchSachNhanh)
+        self.ui.btn_them.clicked.connect(self.handleSearchingLsMuon)
+        
 
 #EDIT MUONTRA
     def UpdateMT(self):

@@ -98,7 +98,7 @@ class mydb:
             self.mydb.commit()
             return True
         except Error  as e:
-            print(e)
+            
             return False   
     #xu ly sach mat hoac hong
     def handleUpdateMatHongSach(self,muon):
@@ -116,13 +116,13 @@ class mydb:
             self.mydb.commit()
             return True
         except Error  as e:
-            print(e)
+            
             return False 
     #xu ly tim ls muon cua doc gia
     def handleTimLsMuon(self,madocgia, masach):
         cursor = self.mydb.cursor()
         sql = """
-                SELECT docgia.madocgia,RTRIM(LTRIM(CONCAT(COALESCE(docgia.firstname + ' ', ''),COALESCE(docgia.lastname, '')))) AS Name,muon.masach,sach.tensach,
+                SELECT docgia.madocgia, CONCAT(docgia.firstname, ' ', docgia.lastname) AS name,muon.masach,sach.tensach,
                 muon.ngaymuon,muon.ngaytra,tinhtrang.tinhtrang
                 FROM muon
                     JOIN docgia ON docgia.madocgia = muon.madocgia
@@ -136,7 +136,7 @@ class mydb:
         val = (madocgia,masach)
         cursor.execute(sql, val)
         results =cursor.fetchall()
-        print(results)
+        # print(results)
         return results
     # lay du lieu cua ban sach
     def handleLoadSach(self):
@@ -225,7 +225,7 @@ class mydb:
                 ORDER BY masach
             """
         val = (f'{masach}%', f'{tensach}%', f'%{tacgia}%', f'%{nxb}%', f'%{theloai}%')
-        print(masach, tensach, tacgia, nxb, theloai)
+        # print(masach, tensach, tacgia, nxb, theloai)
         cursor.execute(sql, val)
         results =cursor.fetchall()
         return results
