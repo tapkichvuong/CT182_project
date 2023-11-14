@@ -1,0 +1,5 @@
+<RCC>
+  <qresource prefix="newPrefix">
+    <file>../images/Logo_Dai_hoc_Can_Tho.png</file>
+  </qresource>
+</RCC>

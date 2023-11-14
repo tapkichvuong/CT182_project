@@ -8,7 +8,7 @@ from changePassword.changePassword import change_password
 from myProfile.profile import profile
 from muontra.muontra import ql_muontra
 from chart.Statistic import statistic
-from connector.mySql import mydb
+from home.home import Home
 
 class MainWindow(QMainWindow):
     def __init__(self, login_instance):
@@ -21,6 +21,9 @@ class MainWindow(QMainWindow):
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
 
+        self.home = Home()
+        self.ui.gridLayout_2.addWidget(self.home, 0,0,1,1)
+        
         self.qlsach =qlsach(self)
         self.ui.gridLayout_4.addWidget(self.qlsach,0,0,1,1)
 
