@@ -334,4 +334,4 @@ class Ui_Profile(object):
         self.comboBox.setItemText(0, _translate("Profile", "Nam"))
         self.comboBox.setItemText(1, _translate("Profile", "Nữ"))
         self.comboBox.setItemText(2, _translate("Profile", "Khác"))
-from mainwindow import profile_rsc_rc
+from myProfile import profile_rsc_rc

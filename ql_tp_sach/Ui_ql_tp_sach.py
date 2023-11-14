@@ -310,4 +310,4 @@ class Ui_ql_tp_sach(object):
         item.setText(_translate("ql_tp_sach", "Tên NXB"))
         self.label_manxb.setText(_translate("ql_tp_sach", "Mã NXB"))
         self.label_tennxb.setText(_translate("ql_tp_sach", "Tên NXB"))
-from mainwindow import ql_tp_sach_rsc_rc
+from ql_tp_sach import ql_tp_sach_rsc_rc
