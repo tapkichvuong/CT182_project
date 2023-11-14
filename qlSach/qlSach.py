@@ -90,22 +90,24 @@ class qlsach(QWidget):
         db= mydb()
         tacgia=db.handleLoadTacGia()
         self.ui.comboBox_1.addItem('')
+        
         for tacgia in tacgia:
-            self.ui.comboBox_1.addItem(str(tacgia[1]),str(tacgia[0]))
+            self.ui.comboBox_1.addItem(str(tacgia[1]),tacgia[0])
 #LOAD NXB CBB
     def handleLoadNXB_CBB(self):
         db= mydb()
         nxb=db.handleLoadNXB()
         self.ui.comboBox_2.addItem('')
         for nxb in nxb:
-            self.ui.comboBox_2.addItem(str(nxb[1]),str(nxb[0]))
+            self.ui.comboBox_2.addItem(str(nxb[1]),nxb[0])
 #LOAD THE LOAI CBB
     def handleLoadTheLoai_CBB(self):
         db= mydb()
         tl=db.handleLoadTheLoai()
         self.ui.comboBox_3.addItem('')
         for tl in tl:
-            self.ui.comboBox_3.addItem(str(tl[1]),int(str(tl[0])))
+            self.ui.comboBox_3.addItem(str(tl[1]),tl[0])
+
 #LOAD LAI TABLE SACH
     def handleLoadSach(self):
         db=mydb()
@@ -151,12 +153,12 @@ class qlsach(QWidget):
                 self.ui.tableWidget.setItem(tablerow, 5, QTableWidgetItem(str(row[5])))
                 self.ui.tableWidget.setItem(tablerow, 6, QTableWidgetItem(row[6]))
             else:
-                self.ui.lineEdit_masach.setText('')
-                self.ui.lineEdit_tensach.setText('')
-                self.handleLoadTacGia_CBB()
-                self.handleLoadNXB_CBB()
-                self.handleLoadTheLoai_CBB()
-                self.ui.lineEdit_10.setText('')
+                # self.ui.lineEdit_masach.setText('')
+                # self.ui.lineEdit_tensach.setText('')
+                # self.handleLoadTacGia_CBB()
+                # self.handleLoadNXB_CBB()
+                # self.handleLoadTheLoai_CBB()
+                # self.ui.lineEdit_10.setText('')
                 self.ui.tableWidget.setItem(tablerow, 0, QTableWidgetItem(str(row[0])))
                 self.ui.tableWidget.setItem(tablerow, 1, QTableWidgetItem(row[1]))
                 self.ui.tableWidget.setItem(tablerow, 2, QTableWidgetItem(row[2]))
