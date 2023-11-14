@@ -38,12 +38,7 @@ class mydb:
     def handleSearchDocGiaNhanh(self,madocgia):
         cursor = self.mydb.cursor()
         sql = """
-                SELECT madocgia,RTRIM(LTRIM(
-        CONCAT(
-            COALESCE(firstname + ' ', '')
-            , COALESCE(lastname, '')
-        )
-        )) AS Name
+                SELECT madocgia, CONCAT(firstname, ' ', lastname) AS name
                 FROM docgia
                 WHERE madocgia =%s
                 
