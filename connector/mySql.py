@@ -50,21 +50,31 @@ class mydb:
         return results
     #xu ly them muon sach
     def handleThemSachMuon(self,muon):
-        try:
-            cursor = self.mydb.cursor()
-            
-            sql = "CALL add_new_sach_muon(%s, %s, %s);"
-            val = (muon['madocgia'],muon['masach'],muon['matt'])
-            cursor.execute(sql, val)
-            cursor.close()
-            self.mydb.commit()
-            
-            return True
-        except Error  as e:
-                # 
-                return False
-        finally:
-            self.mydb.close() 
+        cursor1 = self.mydb.cursor()
+        
+        sql1 = "select sl FROM sach WHERE masach = %s;"
+        val1 = (muon['masach'],)
+        cursor1.execute(sql1, val1)
+        result = cursor1.fetchone()
+        print(result)
+        if result[0] == 0:
+            return False
+        else:
+            try:
+                cursor = self.mydb.cursor()
+                
+                sql = "CALL add_new_sach_muon(%s, %s, %s);"
+                val = (muon['madocgia'],muon['masach'],muon['matt'])
+                cursor.execute(sql, val)
+                cursor.close()
+                self.mydb.commit()
+                
+                return True
+            except Error  as e:
+                    # 
+                    return False
+            finally:
+                self.mydb.close() 
     #xu ly xoa muon
     def handleXoaSachMuon(self, masach,madocgia):
         if not masach:

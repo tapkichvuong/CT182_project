@@ -31,7 +31,7 @@ class qlsach(QWidget):
         # sl = self
         db=mydb()
         msg = QMessageBox()
-        checked = db.handleUpdateSach(masach,tensach,matacgia,manxb,maloai,mota,sl)
+        checked = db.handleUpdateSach(masach,tensach,matacgia,manxb,maloai,sl,mota)
         self.Reload_Page()
 
         if checked:
