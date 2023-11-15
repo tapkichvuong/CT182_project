@@ -139,14 +139,14 @@ class mydb:
                     JOIN sach ON muon.masach =sach.masach
                     JOIN tinhtrang ON tinhtrang.matt = muon.matt
                 WHERE  muon.madocgia LIKE %s
-                    AND muon.masach = %s
+                    AND muon.masach LIKE %s
                 order by muon.madocgia
                     
             """
-        val = (madocgia,masach)
+        val = (f'%{madocgia}%',f'%{masach}%')
         cursor.execute(sql, val)
         results =cursor.fetchall()
-        # print(results)
+        print(results)
         return results
     # lay du lieu cua ban sach
     def handleLoadSach(self):
