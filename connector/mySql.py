@@ -11,7 +11,7 @@ class mydb:
         self.mydb = mysql.connector.connect(
             host = "localhost",
             user = "root",
-            password = "123456",
+            password = "12345678",
             database = "qlthuvien"
         )
     def handleLoadTinhTrang_CBB(self):
